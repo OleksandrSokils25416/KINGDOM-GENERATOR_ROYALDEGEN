@@ -1,16 +1,24 @@
 from transformers import pipeline
 
-gen = pipeline('text-generation', model='EleutherAI/gpt-neo-125M')
+gen_pipeline = pipeline('text-generation', model='EleutherAI/gpt-neo-125M')
 
-context = "City of Homel, Belarus, Chernobyl history"
 
-# Generate the output text with adjusted parameters
-output = gen(context, max_length=300, do_sample=True, temperature=0.9,
-             pad_token_id=50256, truncation=True)
+def generate_text(context, max_length=300, temperature=0.9, output_file='output.txt'):
+    """
+    Parameters:
+    - context (str): The input context for text generation.
+    - max_length (int): Maximum length of generated text.
+    - temperature (float): Sampling temperature to control creativity.
+    - output_file (str): The file path to save the generated text.
+    """
+    output = gen_pipeline(context, max_length=max_length, do_sample=True, temperature=temperature,
+                          pad_token_id=50256, truncation=True)
 
-# Check if output was generated and write to file
-if output:
-    with open('dl.txt', 'w') as f:
-        f.write(output[0]['generated_text'])
-else:
-    print("No text was generated.")
+    if output:
+        generated_text = output[0]['generated_text']
+        with open(output_file, 'w') as f:
+            f.write(generated_text)
+        return generated_text
+    else:
+        print("No text was generated.")
+        return None
