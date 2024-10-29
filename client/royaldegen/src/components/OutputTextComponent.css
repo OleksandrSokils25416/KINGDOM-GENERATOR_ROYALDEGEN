@@ -1,0 +1,19 @@
+.output-text-container {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .output-text-container p {
+    color: rgba(94, 94, 94, 1);
+    text-align: left;
+    font-size: 1.2em;
+  }
+  

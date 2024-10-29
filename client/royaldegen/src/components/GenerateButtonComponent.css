@@ -1,0 +1,37 @@
+/* GenerateButtonComponent.css */
+.generate-button-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .generate-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    height: 50px;
+  }
+  
+  .button-group {
+    display: flex;
+  }
+  
+  .generate-button,
+  .regenerate-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #23c95a;
+    color: white;
+  }
+  
+  .regenerate-button {
+    background-color: #e28941;
+  }
+  
