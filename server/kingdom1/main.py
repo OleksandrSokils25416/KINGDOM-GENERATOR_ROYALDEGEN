@@ -1,24 +1,30 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from transformers import pipeline
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 gen_pipeline = pipeline('text-generation', model='EleutherAI/gpt-neo-125M')
 
+class TextRequest(BaseModel):
+    prompt: str
 
-def generate_text(context, max_length=300, temperature=0.9, output_file='output.txt'):
-    """
-    Parameters:
-    - context (str): The input context for text generation.
-    - max_length (int): Maximum length of generated text.
-    - temperature (float): Sampling temperature to control creativity.
-    - output_file (str): The file path to save the generated text.
-    """
-    output = gen_pipeline(context, max_length=max_length, do_sample=True, temperature=temperature,
-                          pad_token_id=50256, truncation=True)
-
-    if output:
-        generated_text = output[0]['generated_text']
-        with open(output_file, 'w') as f:
-            f.write(generated_text)
-        return generated_text
-    else:
-        print("No text was generated.")
-        return None
+@app.post("/generate-text")
+async def generate_text(request: TextRequest):
+    try:
+        output = gen_pipeline(request.prompt, max_length=300, do_sample=True, temperature=0.9)
+        if output:
+            return {"text": output[0]['generated_text']}
+        else:
+            raise HTTPException(status_code=500, detail="No text was generated.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
