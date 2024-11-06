@@ -5,16 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/client/royaldegen/src/components/AuthComponent.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/royaldegen/src/components/LoginComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/royaldegen/src/components/RegisterComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/Database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1/storage_v2/_src_/database/royaldegen.iDQH9Q/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1/storage_v2/_src_/database/royaldegen.iDQH9Q/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/GenerateButtonComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/GenerateButtonComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/kingdom1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,6 +44,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Database.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "NewModel",
@@ -53,7 +68,30 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="Python.Database">
+    <configuration name="Database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KINGDOM-GENERATOR_ROYALDEGEN" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/server/kingdom1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server/kingdom1/Database.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/client/royaldegen/package.json" />
       <command value="run" />
@@ -96,6 +134,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Database" />
         <item itemvalue="npm.preview" />
         <item itemvalue="npm.lint" />
         <item itemvalue="npm.build" />
@@ -124,11 +163,14 @@
       <workItem from="1730314590648" duration="3241000" />
       <workItem from="1730412190852" duration="18000" />
       <workItem from="1730833888715" duration="313000" />
-      <workItem from="1730880525861" duration="5654000" />
+      <workItem from="1730880525861" duration="7878000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/KINGDOM_GENERATOR_ROYALDEGEN$Database.coverage" NAME="Database Coverage Results" MODIFIED="1730900352391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server/kingdom1" />
   </component>
 </project>

@@ -3,15 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>2411</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2414</IntrospectionStateNumber>
       <ServerVersion>16.3</ServerVersion>
       <StartupTime>1730880458</StartupTime>
       <TimeZones>true ACDT
@@ -825,7 +817,7 @@ false Zulu
 14697||10|C|G
 14697||-9223372036854775808|U|G
 14697||10|U|G</Grants>
-      <IntrospectionStateNumber>2411</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2414</IntrospectionStateNumber>
       <ObjectId>32768</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4244,11 +4236,105 @@ false Zulu
     <schema id="267" parent="6" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>2411</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-11-06.13:28:22</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>2414</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-11-06.13:39:17</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
+    <sequence id="268" parent="267" name="users_id_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>32769</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>2413</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="269" parent="267" name="users">
+      <ObjectId>32770</ObjectId>
+      <StateNumber>2413</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="270" parent="269" name="id">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>2413</StateNumber>
+      <SequenceId>32769</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="271" parent="269" name="username">
+      <DasType>varchar(50)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>2413</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="272" parent="269" name="email">
+      <DasType>varchar(100)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>2413</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="273" parent="269" name="password_hash">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>2413</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="274" parent="269" name="users_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>32774</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2413</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="275" parent="269" name="users_username_key">
+      <ColNames>username</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>32776</ObjectId>
+      <StateNumber>2413</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <index id="276" parent="269" name="users_email_key">
+      <ColNames>email</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>32778</ObjectId>
+      <StateNumber>2413</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="277" parent="269" name="users_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>32775</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2413</StateNumber>
+      <UnderlyingIndexId>32774</UnderlyingIndexId>
+    </key>
+    <key id="278" parent="269" name="users_username_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>32777</ObjectId>
+      <StateNumber>2413</StateNumber>
+      <UnderlyingIndexId>32776</UnderlyingIndexId>
+    </key>
+    <key id="279" parent="269" name="users_email_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>32779</ObjectId>
+      <StateNumber>2413</StateNumber>
+      <UnderlyingIndexId>32778</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>
