@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/KINGDOM-GENERATOR_ROYALDEGEN.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/GenerateButtonComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/GenerateButtonComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/kingdom1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +46,11 @@
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "ts.external.directory.path": "F:\\GitHub_In_SSD\\KINGDOM-GENERATOR_ROYALDEGEN\\client\\royaldegen\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="npm.build">
@@ -117,6 +124,7 @@
       <workItem from="1730314590648" duration="3241000" />
       <workItem from="1730412190852" duration="18000" />
       <workItem from="1730833888715" duration="313000" />
+      <workItem from="1730880525861" duration="5654000" />
     </task>
     <servers />
   </component>
