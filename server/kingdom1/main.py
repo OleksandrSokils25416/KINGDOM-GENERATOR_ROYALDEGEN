@@ -5,6 +5,7 @@ import requests
 from passlib.hash import bcrypt
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import os
 
 app = FastAPI()
 
@@ -23,14 +24,12 @@ DATABASE_CONFIG = {
     "port": "6575"
 }
 
-
 from typing import Optional
 
 class User(BaseModel):
     username: str
     email: str
     password: str
-
 
 class UserLogin(BaseModel):
     username: str
@@ -80,6 +79,7 @@ async def login(user: UserLogin):
         return {"message": "Login successful"}
     else:
         raise HTTPException(status_code=400, detail="Invalid username or password")
+
 class TextRequest(BaseModel):
     prompt: str
     temperature: float
@@ -89,7 +89,7 @@ class TextRequest(BaseModel):
 async def generate_text(request: TextRequest):
     try:
         headers = {
-            "Authorization": "Bearer hf_ApiKey",
+            "Authorization": "Bearer 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",
             "Content-Type": "application/json",
         }
         payload = {
@@ -99,13 +99,41 @@ async def generate_text(request: TextRequest):
                 "max_new_tokens": request.max_tokens,
             },
         }
+
         response = requests.post("https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct", headers=headers, json=payload)
 
         if response.status_code != 200:
             raise HTTPException(status_code=500, detail="API call failed")
 
-        generated_text = response.json()[0]["generated_text"]
+        response_text = response.json()[0]["generated_text"]
+
+        nsfw_directory = os.path.join(os.path.dirname(__file__), 'NSFW')
+        nsfw_words_set = load_nsfw_words(nsfw_directory)
+        isclear = check_text_for_nsfw_words(response_text, nsfw_words_set)
+
+        if isclear:
+            generated_text = response_text
+        else:
+            generated_text = "NSFW detected. Please try another prompt."
+
         return {"text": generated_text}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating text: {str(e)}")
+
+def load_nsfw_words(directory):
+    nsfw_words = set()
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        if os.path.isfile(filepath):
+            with open(filepath, encoding='utf-8') as file:
+                for line in file:
+                    nsfw_words.add(line.strip().lower())
+    return nsfw_words
+
+def check_text_for_nsfw_words(text, nsfw_words):
+    words = text.lower().split()
+    for word in words:
+        if word in nsfw_words:
+            return False
+    return True
