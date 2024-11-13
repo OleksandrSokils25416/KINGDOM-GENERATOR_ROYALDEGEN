@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="royaldegen@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.52">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
       <Grants>1||-9223372036854775808|c|G
@@ -4251,19 +4251,19 @@ false Zulu
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="268" parent="267" name="prompts_id_seq">
-      <DasType>integer|0s</DasType>
       <ObjectId>40960</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>2417</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="269" parent="267" name="users_id_seq">
-      <DasType>integer|0s</DasType>
       <ObjectId>32769</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>2413</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="270" parent="267" name="prompts">
@@ -4279,50 +4279,50 @@ false Zulu
       <OwnerName>postgres</OwnerName>
     </table>
     <column id="272" parent="270" name="id">
-      <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;prompts_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>2417</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <SequenceId>40960</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="273" parent="270" name="user_id">
-      <DasType>integer|0s</DasType>
       <Position>2</Position>
       <StateNumber>2417</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="274" parent="270" name="prompt">
-      <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>2417</StateNumber>
+      <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="275" parent="270" name="temperature">
-      <DasType>double precision|0s</DasType>
       <Position>4</Position>
       <StateNumber>2417</StateNumber>
+      <StoredType>double precision|0s</StoredType>
       <TypeId>701</TypeId>
     </column>
     <column id="276" parent="270" name="max_tokens">
-      <DasType>integer|0s</DasType>
       <Position>5</Position>
       <StateNumber>2417</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="277" parent="270" name="generated_text">
-      <DasType>text|0s</DasType>
       <Position>6</Position>
       <StateNumber>2417</StateNumber>
+      <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
     <column id="278" parent="270" name="created_at">
-      <DasType>timestamp|0s</DasType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>7</Position>
       <StateNumber>2417</StateNumber>
+      <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
     <foreign-key id="279" parent="270" name="prompts_user_id_fkey">
@@ -4350,33 +4350,33 @@ false Zulu
       <UnderlyingIndexId>40968</UnderlyingIndexId>
     </key>
     <column id="282" parent="271" name="id">
-      <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>2413</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <SequenceId>32769</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="283" parent="271" name="username">
-      <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>2413</StateNumber>
+      <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="284" parent="271" name="email">
-      <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>2413</StateNumber>
+      <StoredType>varchar(100)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="285" parent="271" name="password_hash">
-      <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>2413</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="286" parent="271" name="users_pkey">
