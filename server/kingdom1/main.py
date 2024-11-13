@@ -150,7 +150,7 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
         }
 
         response = requests.post(
-            "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct",
+            "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3",
             headers=headers,
             json=payload,
             timeout=10
