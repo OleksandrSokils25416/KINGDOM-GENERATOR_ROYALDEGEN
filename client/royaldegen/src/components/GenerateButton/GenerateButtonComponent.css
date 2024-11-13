@@ -1,4 +1,3 @@
-/* GenerateButtonComponent.css */
 .generate-button-container {
     margin-bottom: 20px;
     display: flex;
@@ -34,4 +33,13 @@
   .regenerate-button {
     background-color: #e28941;
   }
+
+  .generate-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+
+  .generate-button:focus {
+  outline: none;
+}
   

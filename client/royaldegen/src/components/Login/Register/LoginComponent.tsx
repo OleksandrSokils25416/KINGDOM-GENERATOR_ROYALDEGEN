@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./AuthComponent.css";
 
 function Login() {
@@ -24,7 +25,7 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div className="auth-container">
       <h2>Login</h2>
       <input
         type="text"
@@ -39,6 +40,9 @@ function Login() {
         placeholder="Password"
       />
       <button onClick={handleLogin}>Login</button>
+      <p>
+        Don't have an account yet? <Link to="/register">Register</Link>
+      </p>
     </div>
   );
 }

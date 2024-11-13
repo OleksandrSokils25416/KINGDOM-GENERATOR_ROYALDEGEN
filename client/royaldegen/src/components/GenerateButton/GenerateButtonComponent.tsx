@@ -2,7 +2,10 @@ import { useState } from "react";
 import "./GenerateButtonComponent.css";
 
 interface Props {
-  onGenerateText: (context: string, settings: { temperature: number; maxTokens: number }) => void;
+  onGenerateText: (
+    context: string,
+    settings: { temperature: number; maxTokens: number }
+  ) => void;
 }
 
 const GenerateButtonComponent = ({ onGenerateText }: Props) => {

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import GenerateButtonComponent from "./components/GenerateButtonComponent";
-import OutputTextComponent from "./components/OutputTextComponent";
-import Login from "./components/LoginComponent";
-import Register from "./components/RegisterComponent";
+import GenerateButtonComponent from "./components/GenerateButton/GenerateButtonComponent";
+import OutputTextComponent from "./components/OutputText/OutputTextComponent";
+import Login from "./components/Login/Register/LoginComponent";
+import Register from "./components/Login/Register/RegisterComponent";
+import SidebarComponent from "./components/Sidebar/SidebarComponent";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 function App() {
@@ -38,11 +39,7 @@ function App() {
   return (
     <Router>
       <div className="main-container">
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </nav>
+        <SidebarComponent />
         <h1>Kingdom Generator by RoyalDeGen</h1>
         <Routes>
           <Route

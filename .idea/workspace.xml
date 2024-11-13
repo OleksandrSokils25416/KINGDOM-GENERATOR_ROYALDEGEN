@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/kingdom1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/.idea/misc.xml" afterDir="false" />
-    </list>
+    <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +29,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "API",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "F:/GitHub_In_SSD/KINGDOM-GENERATOR_ROYALDEGEN",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -135,8 +132,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main.py" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.main.py" />
     </list>
     <recent_temporary>
       <list>
