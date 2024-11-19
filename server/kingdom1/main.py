@@ -10,7 +10,7 @@ from psycopg2.extras import RealDictCursor
 from datetime import datetime, timedelta
 from typing import Optional
 import requests
-
+import os
 app = FastAPI()
 
 logging.basicConfig(level=logging.DEBUG)
@@ -180,8 +180,19 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
             conn.commit()
             cursor.close()
             conn.close()
+            
+        response_text = response.json()[0]["generated_text"]
+        nsfw_directory = os.path.join(os.path.dirname(__file__), 'NSFW')
+        nsfw_words_set = load_nsfw_words(nsfw_directory)
+        isclear = check_text_for_nsfw_words(response_text, nsfw_words_set)
+
+        if isclear:
+            generated_text = response_text
+        else:
+            generated_text = "NSFW detected. Please try another prompt."
 
         return {"text": generated_text}
+
 
     except HTTPException as e:
         logging.error(f"HTTPException in /generate-text: {str(e)}")
@@ -189,3 +200,20 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
     except Exception as e:
         logging.error(f"Unexpected error in /generate-text: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
+
+def load_nsfw_words(directory):
+    nsfw_words = set()
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        if os.path.isfile(filepath):
+            with open(filepath, encoding='utf-8') as file:
+                for line in file:
+                    nsfw_words.add(line.strip().lower())
+    return nsfw_words
+
+def check_text_for_nsfw_words(text, nsfw_words):
+    words = text.lower().split()
+    for word in words:
+        if word in nsfw_words:
+            return False
+    return True
