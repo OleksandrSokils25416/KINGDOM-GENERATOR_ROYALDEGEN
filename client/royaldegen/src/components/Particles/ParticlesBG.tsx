@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Container, Engine } from "@tsparticles/engine";
+import React from "react";
 
 const ParticlesBG = () => {
   const [init, setInit] = useState(false);
@@ -68,4 +69,4 @@ const ParticlesBG = () => {
   );
 };
 
-export default ParticlesBG;
+export default React.memo(ParticlesBG);
