@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./OutputTextComponent.css";
 
 interface Props {
@@ -7,19 +7,20 @@ interface Props {
 
 const OutputTextComponent = ({ text }: Props) => {
   const [displayedText, setDisplayedText] = useState<string>("");
+  const indexRef = useRef(0);
 
   useEffect(() => {
-    let index = 0;
+    indexRef.current = 0;
     setDisplayedText("");
 
     const interval = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText((prev) => prev + text.charAt(index));
-        index++;
+      if (indexRef.current < text.length) {
+        setDisplayedText((prev) => prev + text.charAt(indexRef.current));
+        indexRef.current += 1;
       } else {
         clearInterval(interval);
       }
-    }, 50);
+    }, 100);
 
     return () => clearInterval(interval);
   }, [text]);

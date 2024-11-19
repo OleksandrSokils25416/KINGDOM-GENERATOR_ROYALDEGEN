@@ -5,7 +5,8 @@ import OutputTextComponent from "./components/OutputText/OutputTextComponent";
 import Login from "./components/Login/Register/LoginComponent";
 import Register from "./components/Login/Register/RegisterComponent";
 import SidebarComponent from "./components/Sidebar/SidebarComponent";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ParticlesBG from "./components/Particles/ParticlesBG";
 
 function App() {
   const [generatedText, setGeneratedText] = useState<string>("");
@@ -58,6 +59,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
+        <ParticlesBG />
       </div>
     </Router>
   );
