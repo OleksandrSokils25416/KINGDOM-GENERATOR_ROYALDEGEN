@@ -5,12 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/OutputText/OutputTextComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/OutputText/OutputTextComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/da" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/de" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/en" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/eo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/es" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fil" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fr-CA-u-sd-caqc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/hi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/hu" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/it" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/kab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ko" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/nl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/no" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/pl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ru" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/sv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/th" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/tlh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/tr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/zh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/kingdom1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,33 +62,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Database.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/personal projects/KINGDOM-GENERATOR_ROYALDEGEN2&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.lint.executor&quot;: &quot;Run&quot;,
-    &quot;npm.preview.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\personal projects\\KINGDOM-GENERATOR_ROYALDEGEN\\client\\royaldegen\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Database.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/personal projects/KINGDOM-GENERATOR_ROYALDEGEN2/server/kingdom1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.lint.executor": "Run",
+    "npm.preview.executor": "Run",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "ts.external.directory.path": "D:\\personal projects\\KINGDOM-GENERATOR_ROYALDEGEN\\client\\royaldegen\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\personal projects\KINGDOM-GENERATOR_ROYALDEGEN2\server\kingdom1" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.Database">
     <configuration name="Database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="KINGDOM-GENERATOR_ROYALDEGEN" />
@@ -131,6 +159,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.lint" />
+      <item itemvalue="npm.preview" />
       <item itemvalue="Python.Database" />
     </list>
     <recent_temporary>
@@ -142,7 +174,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23726.102" />
+        <option value="bundled-python-sdk-5e1850174b45-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23726.102" />
       </set>
     </attachedChunks>
   </component>
@@ -163,6 +196,7 @@
       <workItem from="1731451791385" duration="3145000" />
       <workItem from="1731502221666" duration="2719000" />
       <workItem from="1731510729376" duration="613000" />
+      <workItem from="1732053076446" duration="574000" />
     </task>
     <servers />
   </component>
