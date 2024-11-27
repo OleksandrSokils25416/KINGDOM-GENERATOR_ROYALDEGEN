@@ -9,6 +9,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
+    max-height: 60vh;
   }
   
   .output-text-container p {

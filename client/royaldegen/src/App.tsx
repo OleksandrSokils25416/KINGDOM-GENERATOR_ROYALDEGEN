@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import GenerateButtonComponent from "./components/GenerateButton/GenerateButtonComponent";
 import OutputTextComponent from "./components/OutputText/OutputTextComponent";
@@ -7,10 +7,33 @@ import Register from "./components/Login/Register/RegisterComponent";
 import SidebarComponent from "./components/Sidebar/SidebarComponent";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ParticlesBG from "./components/Particles/ParticlesBG";
+import HeaderComponent from "./components/Header/HeaderComponent";
 
 function App() {
   const [generatedText, setGeneratedText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsSidebarExpanded(true);
+        setIsSidebarVisible(false);
+      } else {
+        setIsSidebarExpanded(false);
+        setIsSidebarVisible(true);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const generateText = async (
     prompt: string,
@@ -37,28 +60,37 @@ function App() {
     }
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarExpanded(!isSidebarExpanded);
+  };
+
   return (
     <Router>
       <div className="main-container">
-        <SidebarComponent />
-        <h1>Kingdom Generator by RoyalDeGen</h1>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <GenerateButtonComponent onGenerateText={generateText} />
-                {loading ? (
-                  <div className="loading-spinner"></div>
-                ) : (
-                  <OutputTextComponent text={generatedText} />
-                )}
-              </>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+        <HeaderComponent toggleSidebar={toggleSidebar} />
+        <SidebarComponent
+          isExpanded={isSidebarExpanded}
+          isVisible={isSidebarVisible}
+        />
+        <main className="content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <GenerateButtonComponent onGenerateText={generateText} />
+                  {loading ? (
+                    <div className="loading-spinner"></div>
+                  ) : (
+                    <OutputTextComponent text={generatedText} />
+                  )}
+                </>
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </main>
         <ParticlesBG />
       </div>
     </Router>

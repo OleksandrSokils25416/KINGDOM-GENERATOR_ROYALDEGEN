@@ -1,21 +1,23 @@
-import { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaHome, FaUserCircle } from "react-icons/fa";
 import "./SidebarComponent.css";
 
-const SidebarComponent = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
+type SidebarProps = {
+  isExpanded: boolean;
+  isVisible: boolean;
+};
 
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+const SidebarComponent: React.FC<SidebarProps> = ({
+  isExpanded,
+  isVisible,
+}) => {
   return (
-    <div className={`sidenav ${isExpanded ? "expanded" : "collapsed"}`}>
-      <button className="expand-button" onClick={toggleSidebar}>
-        ☰
-      </button>
-
+    <div
+      className={`sidenav ${isExpanded ? "expanded" : ""} ${
+        isVisible ? "visible" : ""
+      }`}
+    >
       <ul>
         <li>
           <Link to="/">

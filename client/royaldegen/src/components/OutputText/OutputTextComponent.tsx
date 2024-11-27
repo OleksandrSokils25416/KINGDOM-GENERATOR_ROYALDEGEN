@@ -20,7 +20,7 @@ const OutputTextComponent = ({ text }: Props) => {
       } else {
         clearInterval(interval);
       }
-    }, 100);
+    }, 120);
 
     return () => clearInterval(interval);
   }, [text]);

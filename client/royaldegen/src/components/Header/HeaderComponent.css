@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    background-color: #fff;
+    color: #000;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  .expand-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    font-size: 24px;
+    height: 40px;
+    width: 40px;
+    margin: 0;
+    border-radius: 50%;
+  }
+  
+  .expand-button:hover {
+    background-color: #e3e4e6;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+    margin: 0;
+    line-height: 1.5;
+  }
+  

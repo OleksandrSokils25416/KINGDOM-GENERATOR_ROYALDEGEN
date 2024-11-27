@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/OutputText/OutputTextComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/OutputText/OutputTextComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -1,3 +1,4 @@
+/* Reset and Basic Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,16 +7,17 @@
 
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 
+/* Main Container */
 .main-container {
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
   background: linear-gradient(to bottom, #00bcd4, #2196f3);
   color: white;
@@ -24,6 +26,7 @@ html, body {
   z-index: 1;
 }
 
+/* Background Effects */
 .particles-bg {
   position: fixed;
   top: 0;
@@ -34,13 +37,14 @@ html, body {
   pointer-events: none;
 }
 
-
+/* Typography */
 h1 {
   margin-bottom: 40px;
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+/* Buttons */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -48,13 +52,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #4CAF50; /* Green background */
-  color: white; /* White text */
+  background-color: #4CAF50;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-
+/* Navigation Links */
 nav a {
   color: #ffffff;
   margin-right: 20px;
@@ -67,9 +71,71 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #333333; /* Darker background on hover */
+  background-color: #333333;
 }
 
+/* Sidebar */
+.sidenav {
+  width: 80px;
+  height: calc(100vh - 60px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: 60px;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.sidenav.expanded {
+  width: 240px;
+}
+
+@media (max-width: 1024px) {
+  .sidenav.expanded {
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    transform: translateX(-100%);
+  }
+
+  .sidenav.visible {
+    transform: translateX(0);
+  }
+
+  .sidenav.expanded {
+    width: 120px;
+  }
+}
+
+/* Content */
+.content {
+  margin-left: 80px;
+  margin-top: 60px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidenav.expanded + .content {
+  margin-left: 240px;
+}
+
+@media (max-width: 1024px) {
+  .sidenav.expanded + .content {
+    margin-left: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    /* display: none; */
+  }
+}
+
+/* Loading Spinner */
 .loading-text {
   font-size: 1.5em;
   color: #ffcc00;
@@ -92,6 +158,7 @@ nav a:hover {
   100% { transform: rotate(360deg); }
 }
 
+/* Light Theme Adjustments */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

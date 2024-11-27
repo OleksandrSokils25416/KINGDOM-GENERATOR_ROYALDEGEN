@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import type { Container, Engine } from "@tsparticles/engine";
+import type { Engine } from "@tsparticles/engine";
 import React from "react";
 
 const ParticlesBG = () => {
@@ -15,8 +15,7 @@ const ParticlesBG = () => {
     });
   }, []);
 
-  const particlesLoaded = (container?: Container): Promise<void> => {
-    console.log("Particles loaded", container);
+  const particlesLoaded = (): Promise<void> => {
     return Promise.resolve();
   };
 
