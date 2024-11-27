@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // Import Link and useNavigate
 import "./AuthComponent.css";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Use navigate for redirection after login
 
   const handleLogin = async () => {
     try {
@@ -13,10 +14,15 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
+
       if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("accessToken", data.access_token); // Save token in localStorage
         alert("Login successful!");
+        navigate("/"); // Redirect to home page after login
       } else {
-        alert("Login failed.");
+        const errorText = await response.text();
+        alert(`Login failed: ${errorText}`);
       }
     } catch (error) {
       console.error("Error logging in:", error);

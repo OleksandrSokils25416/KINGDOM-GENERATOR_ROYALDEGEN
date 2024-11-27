@@ -27,7 +27,6 @@ function App() {
     };
 
     handleResize();
-
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -40,18 +39,30 @@ function App() {
     settings: { temperature: number; maxTokens: number }
   ) => {
     setLoading(true);
+
     try {
+      const token = localStorage.getItem("accessToken"); // Retrieve token from localStorage
       const response = await fetch("http://127.0.0.1:8000/generate-text", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include token in the Authorization header
+        },
         body: JSON.stringify({
           prompt,
           temperature: settings.temperature,
           max_tokens: settings.maxTokens,
         }),
       });
-      const data = await response.json();
-      setGeneratedText(data.text);
+
+      if (response.ok) {
+        const data = await response.json();
+        setGeneratedText(data.text);
+      } else {
+        const errorMessage = await response.text();
+        console.error("Error generating text:", errorMessage);
+        setGeneratedText("Error generating text.");
+      }
     } catch (error) {
       console.error("Error generating text:", error);
       setGeneratedText("Error generating text.");

@@ -5,34 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/da" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/de" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/en" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/eo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/es" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fa" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fil" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/fr-CA-u-sd-caqc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/hi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/hu" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/it" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ja" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/kab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ko" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/nl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/no" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/pl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/pt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/ru" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/sv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/th" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/tlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/tr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/NSFW/zh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1/storage_v2/_src_/database/royaldegen.iDQH9Q/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1/storage_v2/_src_/database/royaldegen.iDQH9Q/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/LoginComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/LoginComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/kingdom1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +48,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/personal projects/KINGDOM-GENERATOR_ROYALDEGEN2/server/kingdom1",
+    "last_opened_file_path": "F:/GitHub_In_SSD/KINGDOM-GENERATOR_ROYALDEGEN",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,7 +59,7 @@
     "npm.lint.executor": "Run",
     "npm.preview.executor": "Run",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "ts.external.directory.path": "D:\\personal projects\\KINGDOM-GENERATOR_ROYALDEGEN\\client\\royaldegen\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "F:\\GitHub_In_SSD\\KINGDOM-GENERATOR_ROYALDEGEN\\client\\royaldegen\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -174,8 +153,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23726.102" />
-        <option value="bundled-python-sdk-5e1850174b45-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23726.102" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PY-241.15989.155" />
+        <option value="bundled-python-sdk-babbdf50b680-7c6932dee5e4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.15989.155" />
       </set>
     </attachedChunks>
   </component>
@@ -197,6 +176,10 @@
       <workItem from="1731502221666" duration="2719000" />
       <workItem from="1731510729376" duration="613000" />
       <workItem from="1732053076446" duration="574000" />
+      <workItem from="1732114572414" duration="828000" />
+      <workItem from="1732143353569" duration="20000" />
+      <workItem from="1732699400245" duration="386000" />
+      <workItem from="1732715071591" duration="985000" />
     </task>
     <servers />
   </component>
