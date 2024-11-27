@@ -18,7 +18,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("accessToken", data.access_token); // Save token in localStorage
-        alert("Login successful!");
+        //alert("Login successful!");
         navigate("/"); // Redirect to home page after login
       } else {
         const errorText = await response.text();

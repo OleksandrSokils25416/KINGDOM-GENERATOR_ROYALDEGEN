@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./AuthComponent.css";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
 
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   // Register.tsx
   const handleRegister = async () => {
@@ -16,7 +17,8 @@ function Register() {
         body: JSON.stringify({ username, email, password }), // Include email
       });
       if (response.ok) {
-        alert("Registration successful!");
+       // alert("Registration successful!");
+        navigate("/login");
       } else {
         alert("Registration failed.");
       }
@@ -25,7 +27,6 @@ function Register() {
       alert("Error registering.");
     }
   };
-
   return (
     <div className="auth-container">
       <h2>Register</h2>
