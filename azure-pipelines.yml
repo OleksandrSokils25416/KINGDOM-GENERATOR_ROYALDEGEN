@@ -1,0 +1,41 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: Build_Frontend
+    displayName: "Build Frontend"
+    jobs:
+      - job: Frontend
+        displayName: "Install and Build Frontend"
+        steps:
+          - script: |
+              cd client/royaldegen
+              npm install
+              npm start
+            displayName: "Install Dependencies and Build React App"
+
+  - stage: Build_Backend
+    displayName: "Build Backend"
+    jobs:
+      - job: Backend
+        displayName: "Install Backend and Setup Database"
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+              addToPath: true
+
+          - script: |
+              python -m venv venv
+              source venv/bin/activate
+              pip install -r server/kingdom1/requirements.txt
+            displayName: "Install Dependencies"
+
+          - script: |
+              python server/kingdom1/Database.py
+            displayName: "Run Database Setup Script"
