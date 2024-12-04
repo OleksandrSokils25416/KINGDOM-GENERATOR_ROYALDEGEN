@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/kingdom1/KingdomStoriesTrainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b12a5f46-f2f6-4335-af3c-64e6b13af8f1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/LoginComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/LoginComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/RegisterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/RegisterComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/kingdom1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

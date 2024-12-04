@@ -142,10 +142,22 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
         else:
             username = None  # No authentication provided
 
-        # Huggin Face Api
+        # Interpret the prompt as a list of tags
+        tags = [tag.strip() for tag in request.prompt.split(",")]
+        logging.debug(f"Extracted tags: {tags}")
+
+        # Create a structured story based on the tags
+        story_prompt = (
+            "Create a kingdom story using the following elements: "
+            + ", ".join(tags) +
+            ". Include characters, events, and descriptions to bring the tags to life."
+        )
+        logging.debug(f"Generated story prompt: {story_prompt}")
+
+        # Hugging Face API call
         headers = {"Authorization": "Bearer hf_HugginFaceAPI", "Content-Type": "application/json"}
         payload = {
-            "inputs": request.prompt,
+            "inputs": story_prompt,
             "parameters": {"temperature": request.temperature, "max_new_tokens": request.max_tokens},
         }
 
@@ -156,15 +168,20 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
             timeout=10
         )
 
-        # Errors
+        # Handle errors from Hugging Face API
         if response.status_code != 200:
             logging.error(f"Hugging Face API returned {response.status_code}: {response.text}")
             raise HTTPException(status_code=500, detail="API call failed")
 
-        generated_text = response.json()[0]["generated_text"]
-        logging.info(f"Generated text: {generated_text}")
+        # Process the generated text
+        full_text = response.json()[0]["generated_text"]
+        logging.debug(f"Full text received: {full_text}")
 
-        # Save generated prompt and response if user is logged in
+        # Remove the root prompt text from the response
+        cleaned_text = full_text.replace(story_prompt, "").strip()
+        logging.info(f"Cleaned generated text: {cleaned_text}")
+
+        # Save generated story if user is logged in
         if username:
             conn = get_db_connection()
             cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -175,24 +192,21 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
                 INSERT INTO prompts (user_id, prompt, temperature, max_tokens, generated_text)
                 VALUES (%s, %s, %s, %s, %s)
                 """,
-                (user_id, request.prompt, request.temperature, request.max_tokens, generated_text)
+                (user_id, request.prompt, request.temperature, request.max_tokens, cleaned_text)
             )
             conn.commit()
             cursor.close()
             conn.close()
-            
-        response_text = response.json()[0]["generated_text"]
+
+        # Check for NSFW content
         nsfw_directory = os.path.join(os.path.dirname(__file__), 'NSFW')
         nsfw_words_set = load_nsfw_words(nsfw_directory)
-        isclear = check_text_for_nsfw_words(response_text, nsfw_words_set)
+        isclear = check_text_for_nsfw_words(cleaned_text, nsfw_words_set)
 
-        if isclear:
-            generated_text = response_text
-        else:
-            generated_text = "NSFW detected. Please try another prompt."
+        if not isclear:
+            cleaned_text = "NSFW detected. Please try another prompt."
 
-        return {"text": generated_text}
-
+        return {"text": cleaned_text}
 
     except HTTPException as e:
         logging.error(f"HTTPException in /generate-text: {str(e)}")
@@ -200,6 +214,7 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
     except Exception as e:
         logging.error(f"Unexpected error in /generate-text: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
+
 
 def load_nsfw_words(directory):
     nsfw_words = set()
