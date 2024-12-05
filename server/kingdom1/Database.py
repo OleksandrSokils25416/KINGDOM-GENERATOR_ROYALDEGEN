@@ -1,14 +1,15 @@
 import psycopg2
-from psycopg2 import sql
+import os
 
 # Database connection settings
 DATABASE_CONFIG = {
-    "dbname": "royaldegen",
-    "user": "postgres",
-    "password": "12345",
-    "host": "localhost",
-    "port": "6575"
+    "dbname": os.environ.get("DBNAME"),
+    "user": os.environ.get("USER"),
+    "password": os.environ.get("PASSWORD"),
+    "host": os.environ.get("HOST"),
+    "port": os.environ.get("PORT"),
 }
+
 
 # Function to create users table if it doesn't exist
 def create_tables():

@@ -155,7 +155,7 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
         logging.debug(f"Generated story prompt: {story_prompt}")
 
         # Hugging Face API call
-        headers = {"Authorization": "Bearer hf_HugginFaceAPI", "Content-Type": "application/json"}
+        headers = {"Authorization": f'Bearer {os.environ.get("HF_APIKEY")}', "Content-Type": "application/json"}
         payload = {
             "inputs": story_prompt,
             "parameters": {"temperature": request.temperature, "max_new_tokens": request.max_tokens},
