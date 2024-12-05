@@ -1,110 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import GenerateButtonComponent from "./components/GenerateButton/GenerateButtonComponent";
-import OutputTextComponent from "./components/OutputText/OutputTextComponent";
-import Login from "./components/Login/Register/LoginComponent";
-import Register from "./components/Login/Register/RegisterComponent";
-import SidebarComponent from "./components/Sidebar/SidebarComponent";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ParticlesBG from "./components/Particles/ParticlesBG";
-import HeaderComponent from "./components/Header/HeaderComponent";
+import GenerateButtonComponent from "./components/GenerateButtonComponent";
+import OutputTextComponent from "./components/OutputTextComponent";
 
 function App() {
   const [generatedText, setGeneratedText] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setIsSidebarExpanded(true);
-        setIsSidebarVisible(false);
-      } else {
-        setIsSidebarExpanded(false);
-        setIsSidebarVisible(true);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const generateText = async (
-    prompt: string,
-    settings: { temperature: number; maxTokens: number }
-  ) => {
-    setLoading(true);
-
+  const generateText = async (prompt: string) => {
     try {
-      const token = localStorage.getItem("accessToken"); // Retrieve token from localStorage
       const response = await fetch("http://127.0.0.1:8000/generate-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include token in the Authorization header
         },
-        body: JSON.stringify({
-          prompt,
-          temperature: settings.temperature,
-          max_tokens: settings.maxTokens,
-        }),
+        body: JSON.stringify({ prompt }),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        setGeneratedText(data.text);
-      } else {
-        const errorMessage = await response.text();
-        console.error("Error generating text:", errorMessage);
-        setGeneratedText("Error generating text.");
-      }
+      const data = await response.json();
+      setGeneratedText(data.text);
     } catch (error) {
       console.error("Error generating text:", error);
-      setGeneratedText("Error generating text.");
-    } finally {
-      setLoading(false);
     }
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarExpanded(!isSidebarExpanded);
-  };
-
   return (
-    <Router>
-      <div className="main-container">
-        <HeaderComponent toggleSidebar={toggleSidebar} />
-        <SidebarComponent
-          isExpanded={isSidebarExpanded}
-          isVisible={isSidebarVisible}
-        />
-        <main className="content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <GenerateButtonComponent onGenerateText={generateText} />
-                  {loading ? (
-                    <div className="loading-spinner"></div>
-                  ) : (
-                    <OutputTextComponent text={generatedText} />
-                  )}
-                </>
-              }
-            />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </main>
-        <ParticlesBG />
-      </div>
-    </Router>
+    <div className="main-container">
+      <h1>Kingdom generator by RoyalDeGen</h1>
+      <GenerateButtonComponent onGenerateText={generateText} />
+      <OutputTextComponent text={generatedText} />
+    </div>
   );
 }
 
