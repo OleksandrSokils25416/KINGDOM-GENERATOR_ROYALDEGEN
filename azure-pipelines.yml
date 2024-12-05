@@ -4,6 +4,7 @@ trigger:
       - main
 
 pool:
+  name: DeGenAgent
   vmImage: 'ubuntu-latest'
 
 stages:
