@@ -19,20 +19,16 @@ stages:
               npm install
               npm start
             displayName: "Install Dependencies and Build React App"
-
   - stage: Build_Backend
     displayName: "Build Backend"
     jobs:
       - job: Backend
         displayName: "Install Backend and Setup Database"
         steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '3.x'
-              disableDownloadFromRegistry: false
-              allowUnstable: true
-              githubToken: $(gitToken)
-              addToPath: true
+          - script: |
+              python --version
+              pip --version
+            displayName: "Verify Python Installation"
 
           - script: |
               python -m venv venv
@@ -43,3 +39,4 @@ stages:
           - script: |
               python server/kingdom1/Database.py
             displayName: "Run Database Setup Script"
+
