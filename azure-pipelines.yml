@@ -30,6 +30,7 @@ stages:
             inputs:
               versionSpec: '3.12'
               allowUnstable: true
+              githubToken: '$(gitToken)'
               addToPath: true
 
           - script: |
