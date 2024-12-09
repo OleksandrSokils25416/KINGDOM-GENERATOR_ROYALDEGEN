@@ -26,6 +26,7 @@ stages:
         displayName: "Install Backend and Setup Database"
         steps:
           - script: |
+              set PATH=C:\Python312;C:\Python312\Scripts;%PATH%
               python --version
               pip --version
             displayName: "Verify Python Installation"
