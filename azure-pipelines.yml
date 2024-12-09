@@ -27,8 +27,11 @@ stages:
         displayName: "Install Backend and Setup Database"
         steps:
           - script: |
-              echo %PATH%
-            displayName: "Debug PATH Environment Variable"
+              $env:Path = "$env:Path;C:\Python312;C:\Python312\Scripts"
+              echo %Path%
+              python --version
+              pip --version
+            displayName: "Update PATH and Verify Python"
           - script: |
               python -m venv venv
               venv\Scripts\activate
