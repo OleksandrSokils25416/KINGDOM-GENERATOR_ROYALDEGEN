@@ -26,13 +26,7 @@ stages:
       - job: Backend
         displayName: "Install Backend and Setup Database"
         steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '3.12.7'
-              disableDownloadFromRegistry: false
-              allowUnstable: true
-              githubToken: $(gitToken)
-              addToPath: true
+        
 
           - script: |
               python -m venv venv
