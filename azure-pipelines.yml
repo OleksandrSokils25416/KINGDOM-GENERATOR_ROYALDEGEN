@@ -27,6 +27,9 @@ stages:
         displayName: "Install Backend and Setup Database"
         steps:
           - script: |
+              echo %PATH%
+            displayName: "Debug PATH Environment Variable"
+          - script: |
               python -m venv venv
               venv\Scripts\activate
               pip install -r server\kingdom1\requirements.txt
