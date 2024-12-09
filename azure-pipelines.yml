@@ -26,14 +26,12 @@ stages:
       - job: Backend
         displayName: "Install Backend and Setup Database"
         steps:
-        
-
           - script: |
               python -m venv venv
-              source venv/bin/activate
-              pip install -r server/kingdom1/requirements.txt
+              venv\Scripts\activate
+              pip install -r server\kingdom1\requirements.txt
             displayName: "Install Dependencies"
 
           - script: |
-              python server/kingdom1/Database.py
+              python server\kingdom1\Database.py
             displayName: "Run Database Setup Script"
