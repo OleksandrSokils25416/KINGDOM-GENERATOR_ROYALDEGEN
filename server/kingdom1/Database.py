@@ -1,13 +1,15 @@
 import psycopg2
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Database connection settings
 DATABASE_CONFIG = {
-    "dbname": os.environ.get("DBNAME"),
-    "user": os.environ.get("USER"),
-    "password": os.environ.get("PASSWORD"),
-    "host": os.environ.get("HOST"),
-    "port": os.environ.get("PORT"),
+    "dbname": os.getenv("DBNAME"),
+    "user": os.getenv("USER"),
+    "password": os.getenv("PASSWORD"),
+    "host": os.getenv("HOST"),
+    "port": os.getenv("PORT"),
 }
 
 
