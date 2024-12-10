@@ -14,22 +14,21 @@ stages:
       - job: Frontend
         displayName: "Install and Build Frontend"
         steps:
+          - task: UseNode@1
+            inputs:
+              version: '20.15.0'
+              checkLatest: true
+            displayName: "Install Node.js 20.15.0"
+
           - script: |
               cd client/royaldegen
               npm install
-              npm start
+              npm run build
             displayName: "Install Dependencies and Build React App"
-
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: 'client/royaldegen'
-              Contents: '**'
-              TargetFolder: '$(Build.ArtifactStagingDirectory)/frontend'
-            displayName: "Copy Frontend Build Files"
 
           - task: PublishBuildArtifacts@1
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend'
+              PathtoPublish: 'client/royaldegen'
               ArtifactName: 'frontend'
             displayName: "Publish Frontend Build Artifact"
 
