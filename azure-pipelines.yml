@@ -26,14 +26,21 @@ stages:
       - job: Backend
         displayName: "Install Backend and Setup Database"
         steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+              disableDownloadFromRegistry: false
+              allowUnstable: true
+              githubToken: $(gitToken)
+              addToPath: true
+
           - script: |
               cd server/kingdom1
               python -m venv venv
               venv\Scripts\activate
-              pip install -r server\kingdom1\requirements.txt
+              pip install -r server/kingdom1/requirements.txt
             displayName: "Install Dependencies"
 
           - script: |
-              cd server/kingdom1
-              python server\kingdom1\Database.py
+              python server/kingdom1/Database.py
             displayName: "Run Database Setup Script"
