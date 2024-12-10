@@ -26,9 +26,18 @@ stages:
               npm run build
             displayName: "Install Dependencies and Build React App"
 
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: 'client/royaldegen'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/frontend.zip'
+              replaceExistingArchive: true
+            displayName: "Archive Frontend Files"
+
           - task: PublishBuildArtifacts@1
             inputs:
-              PathtoPublish: 'client/royaldegen'
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend.zip'
               ArtifactName: 'frontend'
             displayName: "Publish Frontend Build Artifact"
 
