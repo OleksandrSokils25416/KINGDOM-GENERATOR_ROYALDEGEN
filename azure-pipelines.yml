@@ -22,7 +22,7 @@ stages:
 
           - task: CopyFiles@2
             inputs:
-              SourceFolder: 'client/royaldegen/build'
+              SourceFolder: 'client/royaldegen'
               Contents: '**'
               TargetFolder: '$(Build.ArtifactStagingDirectory)/frontend'
             displayName: "Copy Frontend Build Files"
