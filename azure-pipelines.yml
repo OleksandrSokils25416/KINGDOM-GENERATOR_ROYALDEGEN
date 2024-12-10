@@ -17,15 +17,22 @@ stages:
           - script: |
               cd client/royaldegen
               npm install
-              npm start
+              npm run build
             displayName: "Install Dependencies and Build React App"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: $(System.DefaultWorkingDirectory)/client/royaldegen/build
+              artifactName: "frontend"
+              publishLocation: "Container"
+            displayName: "Publish Frontend Build Artifact"
+
   - stage: Build_Backend
     displayName: "Build Backend"
     jobs:
       - job: Backend
         displayName: "Install Backend and Setup Database"
         steps:
-        
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '3.12.7'
@@ -42,3 +49,15 @@ stages:
               venv\Scripts\activate
               python server/kingdom1/Database.py
             displayName: "Run Database Setup Script"
+
+          - script: |
+              mkdir $(Build.ArtifactStagingDirectory)\backend
+              xcopy server\kingdom1\* $(Build.ArtifactStagingDirectory)\backend /s /e /y
+            displayName: "Prepare Backend Build Artifacts"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: $(Build.ArtifactStagingDirectory)\backend
+              artifactName: "backend"
+              publishLocation: "Container"
+            displayName: "Publish Backend Build Artifact"
