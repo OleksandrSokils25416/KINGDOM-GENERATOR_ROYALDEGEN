@@ -28,8 +28,7 @@ stages:
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '3.12'
-              githubToken: $(gitToken)
-              addToPath: true
+          - bash: tree  $(Agent.ToolsDirectory)/python/3.12
             displayName: "Install Python"
 
           - script: |
