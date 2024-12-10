@@ -20,9 +20,14 @@ stages:
               npm run build
             displayName: "Install Dependencies and Build React App"
 
+          - script: |
+              mkdir "$(Build.ArtifactStagingDirectory)\frontend" || echo "Frontend directory already exists"
+              xcopy client\royaldegen\build\* "$(Build.ArtifactStagingDirectory)\frontend" /s /e /y
+            displayName: "Prepare Frontend Build Artifacts"
+
           - task: PublishBuildArtifacts@1
             inputs:
-              pathToPublish: $(System.DefaultWorkingDirectory)/client/royaldegen/build
+              pathToPublish: $(Build.ArtifactStagingDirectory)\frontend
               artifactName: "frontend"
               publishLocation: "Container"
             displayName: "Publish Frontend Build Artifact"
@@ -51,8 +56,8 @@ stages:
             displayName: "Run Database Setup Script"
 
           - script: |
-              mkdir $(Build.ArtifactStagingDirectory)\backend
-              xcopy server\kingdom1\* $(Build.ArtifactStagingDirectory)\backend /s /e /y
+              mkdir "$(Build.ArtifactStagingDirectory)\backend" || echo "Backend directory already exists"
+              xcopy server\kingdom1\* "$(Build.ArtifactStagingDirectory)\backend" /s /e /y
             displayName: "Prepare Backend Build Artifacts"
 
           - task: PublishBuildArtifacts@1
