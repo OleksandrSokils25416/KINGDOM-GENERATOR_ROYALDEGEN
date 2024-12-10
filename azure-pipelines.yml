@@ -21,7 +21,9 @@ stages:
             displayName: "Install Dependencies and Build React App"
 
           - script: |
-              mkdir "$(Build.ArtifactStagingDirectory)\frontend" || echo "Frontend directory already exists"
+              IF NOT EXIST "$(Build.ArtifactStagingDirectory)\frontend" (
+                  mkdir "$(Build.ArtifactStagingDirectory)\frontend"
+              )
               xcopy client\royaldegen\build\* "$(Build.ArtifactStagingDirectory)\frontend" /s /e /y
             displayName: "Prepare Frontend Build Artifacts"
 
@@ -56,7 +58,9 @@ stages:
             displayName: "Run Database Setup Script"
 
           - script: |
-              mkdir "$(Build.ArtifactStagingDirectory)\backend" || echo "Backend directory already exists"
+              IF NOT EXIST "$(Build.ArtifactStagingDirectory)\backend" (
+                  mkdir "$(Build.ArtifactStagingDirectory)\backend"
+              )
               xcopy server\kingdom1\* "$(Build.ArtifactStagingDirectory)\backend" /s /e /y
             displayName: "Prepare Backend Build Artifacts"
 
