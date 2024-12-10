@@ -17,21 +17,20 @@ stages:
           - script: |
               cd client/royaldegen
               npm install
-              npm run build
+              npm start
             displayName: "Install Dependencies and Build React App"
 
-          - script: |
-              IF NOT EXIST "$(Build.ArtifactStagingDirectory)\frontend" (
-                  mkdir "$(Build.ArtifactStagingDirectory)\frontend"
-              )
-              xcopy client\royaldegen\build\* "$(Build.ArtifactStagingDirectory)\frontend" /s /e /y
-            displayName: "Prepare Frontend Build Artifacts"
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: 'client/royaldegen/build'
+              Contents: '**'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/frontend'
+            displayName: "Copy Frontend Build Files"
 
           - task: PublishBuildArtifacts@1
             inputs:
-              pathToPublish: $(Build.ArtifactStagingDirectory)\frontend
-              artifactName: "frontend"
-              publishLocation: "Container"
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend'
+              ArtifactName: 'frontend'
             displayName: "Publish Frontend Build Artifact"
 
   - stage: Build_Backend
@@ -57,16 +56,17 @@ stages:
               python server/kingdom1/Database.py
             displayName: "Run Database Setup Script"
 
-          - script: |
-              IF NOT EXIST "$(Build.ArtifactStagingDirectory)\backend" (
-                  mkdir "$(Build.ArtifactStagingDirectory)\backend"
-              )
-              xcopy server\kingdom1\* "$(Build.ArtifactStagingDirectory)\backend" /s /e /y
-            displayName: "Prepare Backend Build Artifacts"
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: 'server/kingdom1'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/backend.zip'
+              replaceExistingArchive: true
+            displayName: "Archive Backend Files"
 
           - task: PublishBuildArtifacts@1
             inputs:
-              pathToPublish: $(Build.ArtifactStagingDirectory)\backend
-              artifactName: "backend"
-              publishLocation: "Container"
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend.zip'
+              ArtifactName: 'backend'
             displayName: "Publish Backend Build Artifact"
