@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="added Dockerfiles">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/pipeline.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/royaldegen.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/kingdom1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +199,8 @@
       <workItem from="1733423815896" duration="657000" />
       <workItem from="1733424480382" duration="115000" />
       <workItem from="1733424602809" duration="545000" />
+      <workItem from="1733883390041" duration="1890000" />
+      <workItem from="1733909094509" duration="798000" />
     </task>
     <servers />
   </component>
