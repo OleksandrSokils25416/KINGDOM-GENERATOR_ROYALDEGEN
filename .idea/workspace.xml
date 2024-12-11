@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="added Dockerfiles" />
+    <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="added Dockerfiles">
+      <change beforePath="$PROJECT_DIR$/client/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,6 +80,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Study\SUML\royaldegen" />
       <recent name="D:\personal projects\KINGDOM-GENERATOR_ROYALDEGEN2\server\kingdom1" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Study\SUML\royaldegen\client\royaldegen" />
     </key>
   </component>
   <component name="RunManager" selected="Python.Database">

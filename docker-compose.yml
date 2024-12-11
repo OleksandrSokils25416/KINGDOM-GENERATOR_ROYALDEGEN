@@ -3,7 +3,7 @@ services:
   frontend:
     build:
       context: ./client
-      dockerfile: Dockerfile
+      dockerfile: client/royaldegen/Dockerfile
     container_name: frontend
     ports:
       - "5173:80"  # Access the frontend via port 5173
