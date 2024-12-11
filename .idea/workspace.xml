@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="added Dockerfiles" />
+    <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="added Dockerfiles">
+      <change beforePath="$PROJECT_DIR$/server/kingdom1/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -194,7 +196,7 @@
       <workItem from="1733424480382" duration="115000" />
       <workItem from="1733424602809" duration="545000" />
       <workItem from="1733883390041" duration="1890000" />
-      <workItem from="1733909094509" duration="1111000" />
+      <workItem from="1733909094509" duration="1808000" />
     </task>
     <servers />
   </component>
