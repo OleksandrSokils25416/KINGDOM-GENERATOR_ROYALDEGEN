@@ -29,11 +29,11 @@ app.add_middleware(
 
 # Database Config
 DATABASE_CONFIG = {
-    "dbname": "royaldegen",
-    "user": "postgres",
-    "password": "12345",
-    "host": "localhost",
-    "port": "6575"
+    "dbname": os.getenv("DBNAME"),
+    "user": os.getenv("USER"),
+    "password": os.getenv("PASSWORD"),
+    "host": os.getenv("HOST"),
+    "port": os.getenv("PORT"),
 }
 
 # JWT Secret and Algorithm
