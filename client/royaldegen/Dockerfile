@@ -1,8 +1,10 @@
 FROM node:alpine as build
 
+WORKDIR /app
+
 COPY package.json package.json
 RUN npm install
-COPY .. .
+COPY . .
 RUN npm build
 
 FROM nginx:stable-alpine
