@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="added Dockerfiles">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/LoginComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/LoginComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/RegisterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/src/components/Login/Register/RegisterComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +69,7 @@
     "npm.lint.executor": "Run",
     "npm.preview.executor": "Run",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "ts.external.directory.path": "F:\\GitHub_In_SSD\\KINGDOM-GENERATOR_ROYALDEGEN\\client\\royaldegen\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "F:\\Study\\SUML\\royaldegen\\client\\royaldegen\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -96,6 +97,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (royaldegen)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/server/kingdom1" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
