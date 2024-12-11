@@ -1,13 +1,14 @@
-# Stage 1: Build the React app
-FROM node:16 AS build
-WORKDIR /app
-COPY royaldegen/package*.json ./
-RUN npm install
-COPY royaldegen/ .
-RUN npm run build
+FROM node:alpine as build
 
-# Stage 2: Serve with Nginx
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY package.json package.json
+RUN npm install
+COPY . .
+RUN npm build
+
+FROM nginx:stable-alpine
+
+COPY ./royaldegen/dist /usr/share/nginx/html
+COPY ./royaldegen/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 5500
+
+CMD["nginx", "-g", "daemon off;"]
