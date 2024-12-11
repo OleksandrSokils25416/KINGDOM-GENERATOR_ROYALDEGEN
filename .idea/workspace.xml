@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/royaldegen/tsconfig.app.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/client/royaldegen/tsconfig.app.tsbuildinfo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/kingdom1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
