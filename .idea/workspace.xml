@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5bce6a8a-79a1-473c-aecc-b8b229db533c" name="Changes" comment="added Dockerfiles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/kingdom1/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/kingdom1/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +199,7 @@
       <workItem from="1733424480382" duration="115000" />
       <workItem from="1733424602809" duration="545000" />
       <workItem from="1733881660067" duration="4886000" />
-      <workItem from="1733924564798" duration="1225000" />
+      <workItem from="1733924564798" duration="2191000" />
     </task>
     <servers />
   </component>
