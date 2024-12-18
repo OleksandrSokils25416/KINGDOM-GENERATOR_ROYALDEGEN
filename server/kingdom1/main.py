@@ -85,6 +85,20 @@ class TextRequest(BaseModel):
     temperature: float
     max_tokens: int
 
+class SubscriptionPlan(BaseModel):
+    name: str
+    price: float
+    duration_days: int
+    description: Optional[str] = None
+
+class UserSubscription(BaseModel):
+    user_id: int
+    plan_id: int
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    status: str = 'active'
+
+
 @app.post("/register")
 async def register(user: User):
     conn = get_db_connection()
@@ -235,3 +249,90 @@ def check_text_for_nsfw_words(text, nsfw_words):
         if word in nsfw_words:
             return False
     return True
+
+@app.post("/subscriptions/plans")
+async def create_subscription_plan(plan: SubscriptionPlan):
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        cursor.execute(
+            """
+            INSERT INTO subscription_plans (name, price, duration_days, description)
+            VALUES (%s, %s, %s, %s)
+            RETURNING id
+            """,
+            (plan.name, plan.price, plan.duration_days, plan.description)
+        )
+        plan_id = cursor.fetchone()["id"]
+        conn.commit()
+        return {"message": "Subscription plan created successfully", "plan_id": plan_id}
+    except Exception as e:
+        conn.rollback()
+        logging.error(f"Error creating subscription plan: {str(e)}")
+        raise HTTPException(status_code=500, detail="Could not create subscription plan")
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.post("/subscriptions")
+async def subscribe_user(user_subscription: UserSubscription):
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        # Calculate end_date based on plan duration
+        cursor.execute(
+            """
+            SELECT duration_days FROM subscription_plans WHERE id = %s
+            """,
+            (user_subscription.plan_id,)
+        )
+        plan = cursor.fetchone()
+        if not plan:
+            raise HTTPException(status_code=404, detail="Subscription plan not found")
+
+        start_date = datetime.utcnow()
+        end_date = start_date + timedelta(days=plan["duration_days"])
+
+        cursor.execute(
+            """
+            INSERT INTO user_subscriptions (user_id, plan_id, start_date, end_date, status)
+            VALUES (%s, %s, %s, %s, %s)
+            RETURNING id
+            """,
+            (user_subscription.user_id, user_subscription.plan_id, start_date, end_date, user_subscription.status)
+        )
+        subscription_id = cursor.fetchone()["id"]
+        conn.commit()
+        return {"message": "User subscribed successfully", "subscription_id": subscription_id}
+    except Exception as e:
+        conn.rollback()
+        logging.error(f"Error subscribing user: {str(e)}")
+        raise HTTPException(status_code=500, detail="Could not subscribe user")
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.get("/subscriptions/{user_id}")
+async def get_user_subscription(user_id: int):
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        cursor.execute(
+            """
+            SELECT us.*, sp.name AS plan_name, sp.price, sp.duration_days
+            FROM user_subscriptions us
+            JOIN subscription_plans sp ON us.plan_id = sp.id
+            WHERE us.user_id = %s AND us.status = 'active'
+            """,
+            (user_id,)
+        )
+        subscription = cursor.fetchone()
+        if not subscription:
+            return {"message": "No active subscription found for user"}
+        return subscription
+    except Exception as e:
+        logging.error(f"Error fetching subscription: {str(e)}")
+        raise HTTPException(status_code=500, detail="Could not fetch subscription")
+    finally:
+        cursor.close()
+        conn.close()
