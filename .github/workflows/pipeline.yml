@@ -92,6 +92,7 @@ jobs:
     steps:
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD }}" | docker login ghcr.io -u ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }} --password-stdin
+        
       - name: Deploy to Azure Web App Client
         id: deploy-to-webapp-client
         uses: azure/webapps-deploy@v2
@@ -111,6 +112,7 @@ jobs:
     steps:
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD }}" | docker login ghcr.io -u ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }} --password-stdin
+
       - name: Deploy to Azure Web App Client
         id: deploy-to-webapp-server
         uses: azure/webapps-deploy@v2
