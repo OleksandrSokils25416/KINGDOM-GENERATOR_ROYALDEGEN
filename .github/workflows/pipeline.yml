@@ -82,45 +82,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  deploy-image-for-client:
-    runs-on: ubuntu-latest
-    needs: build-and-push-image-for-client
-    environment:
-        name: 'production'
-        url: ${{ steps.deploy-to-webapp-client.outputs.webapp-url }}
-
-    steps:
-      - name: Debug PAT and Network
-        run: echo "Testing PAT Permissions..."
-            curl -v -u "${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }}:${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD }}" https://ghcr.io/v2/
-      - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD }}" | docker login ghcr.io -u ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }} --password-stdin
-
-      - name: Deploy to Azure Web App Client
-        id: deploy-to-webapp-client
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'RoyalDeGenerator'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_CLIENT }}
-          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }}/kingdom-generator_royaldegen/client:sha256:${{ github.sha }}'
-
-  deploy-image-for-server:
-    runs-on: ubuntu-latest
-    needs: build-and-push-image-for-server
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp-server.outputs.webapp-url }}
-
-    steps:
-      - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD }}" | docker login ghcr.io -u ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }} --password-stdin
-
-      - name: Deploy to Azure Web App Client
-        id: deploy-to-webapp-server
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'RoyalDeGeneratorBack'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_SERVER }}
-          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }}/kingdom-generator_royaldegen/server:sha256:${{ github.sha }}'
+  
