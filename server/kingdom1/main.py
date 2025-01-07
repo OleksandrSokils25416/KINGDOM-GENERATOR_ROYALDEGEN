@@ -98,7 +98,9 @@ class UserSubscription(BaseModel):
     end_date: Optional[datetime] = None
     status: str = 'active'
 
-
+@app.get("/getter")
+async def getter():
+    return "Hello World!"
 @app.post("/register")
 async def register(user: User):
     conn = get_db_connection()
