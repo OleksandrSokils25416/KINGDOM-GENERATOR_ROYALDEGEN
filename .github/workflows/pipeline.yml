@@ -97,7 +97,7 @@ jobs:
           app-name: 'RoyalDeGenerator'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_CLIENT }}
-          images: 'ghcr.io/${{ secrets.AzureAppService_ContainerUsername_c8e2d1534b854de29adf4841f7dacfb9 }}/client:sha256:${{ github.sha }}'
+          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }}/client:sha256:${{ github.sha }}'
 
   deploy-image-for-server:
     runs-on: ubuntu-latest
@@ -114,4 +114,4 @@ jobs:
           app-name: 'RoyalDeGeneratorBack'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_SERVER }}
-          images: 'ghcr.io/${{ secrets.AzureAppService_ContainerUsername_c8e2d1534b854de29adf4841f7dacfb9 }}/server:sha256:${{ github.sha }}'
+          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }}/server:sha256:${{ github.sha }}'
