@@ -17,12 +17,13 @@ function App() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
+        alert("CI/CD successful!");
         setIsSidebarExpanded(true);
       } else {
+        alert("CI/CD successful!");
         setIsSidebarExpanded(false);
       }
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
 
@@ -38,7 +39,7 @@ function App() {
     setLoading(true);
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch("http://127.0.0.1:8000/generate-text", {
+      const response = await fetch("/generate-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
