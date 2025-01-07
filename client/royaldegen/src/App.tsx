@@ -17,10 +17,8 @@ function App() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
-        alert("CI/CD successful!");
         setIsSidebarExpanded(true);
       } else {
-        alert("CI/CD successful!");
         setIsSidebarExpanded(false);
       }
     };
