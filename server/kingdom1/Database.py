@@ -41,8 +41,6 @@ def create_tables():
     );
     """
 
-
-
     cursor.execute(create_users_table)
     cursor.execute(create_prompts_table)
     conn.commit()

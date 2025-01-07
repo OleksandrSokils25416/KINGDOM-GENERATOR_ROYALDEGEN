@@ -72,6 +72,10 @@ function App() {
     setIsSidebarExpanded(!isSidebarExpanded);
   };
 
+  useEffect(() => {
+    alert("Welcome to the application!");
+  }, []);
+
   return (
     <Router>
       <div className="main-container">
