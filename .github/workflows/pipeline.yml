@@ -90,9 +90,12 @@ jobs:
         url: ${{ steps.deploy-to-webapp-client.outputs.webapp-url }}
 
     steps:
+      - name: Debug PAT and Network
+        run: echo "Testing PAT Permissions..."
+            curl -v -u "${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }}:${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD }}" https://ghcr.io/v2/
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD }}" | docker login ghcr.io -u ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME }} --password-stdin
-        
+
       - name: Deploy to Azure Web App Client
         id: deploy-to-webapp-client
         uses: azure/webapps-deploy@v2
