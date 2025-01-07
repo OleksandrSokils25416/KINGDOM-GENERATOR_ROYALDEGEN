@@ -76,7 +76,6 @@ nav a:hover {
 
 /* Sidebar */
 .sidenav {
-  width: 80px;
   height: calc(100vh - 60px);
   position: fixed;
   top: 0;
@@ -86,30 +85,66 @@ nav a:hover {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, width 0.3s ease;
+  z-index: 100;  /* Ensures it appears over other elements */
+}
+
+.sidenav.collapsed {
+  transform: translateX(-100%);
 }
 
 .sidenav.expanded {
   width: 240px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
+  .sidenav {
+    width: 0;  /* Start hidden */
+  }
+
   .sidenav.expanded {
-    width: 120px;
+    width: 100vw;  /* Full width for mobile */
+    transform: translateX(0);
   }
 }
 
-@media (max-width: 768px) {
-  .sidenav {
-    transform: translateX(-100%);
-  }
+.sidenav ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .sidenav.visible {
-    transform: translateX(0);
-  }
+.sidenav li {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+}
 
-  .sidenav.expanded {
-    width: 120px;
-  }
+.sidenav a {
+  text-decoration: none;
+  color: #404040;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.sidenav a:hover {
+  color: #333333;
+}
+
+.icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.sidenav.collapsed .text {
+  display: none;
+}
+
+.sidenav.expanded .text {
+  display: inline;
 }
 
 /* Content */

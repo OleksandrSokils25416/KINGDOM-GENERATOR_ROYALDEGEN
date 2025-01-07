@@ -12,17 +12,14 @@ import HeaderComponent from "./components/Header/HeaderComponent";
 function App() {
   const [generatedText, setGeneratedText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
         setIsSidebarExpanded(true);
-        setIsSidebarVisible(false);
       } else {
         setIsSidebarExpanded(false);
-        setIsSidebarVisible(true);
       }
     };
 
@@ -39,14 +36,13 @@ function App() {
     settings: { temperature: number; maxTokens: number }
   ) => {
     setLoading(true);
-
     try {
-      const token = localStorage.getItem("accessToken"); // Retrieve token from localStorage
-      const response = await fetch("/generate-text", {
+      const token = localStorage.getItem("accessToken");
+      const response = await fetch("http://127.0.0.1:8000/generate-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include token in the Authorization header
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           prompt,
@@ -79,11 +75,8 @@ function App() {
     <Router>
       <div className="main-container">
         <HeaderComponent toggleSidebar={toggleSidebar} />
-        <SidebarComponent
-          isExpanded={isSidebarExpanded}
-          isVisible={isSidebarVisible}
-        />
-        <main className="content">
+        <SidebarComponent isExpanded={isSidebarExpanded} />
+        <main className={`content ${isSidebarExpanded ? "" : "collapsed"}`}>
           <Routes>
             <Route
               path="/"

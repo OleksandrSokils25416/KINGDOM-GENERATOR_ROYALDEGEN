@@ -11,13 +11,13 @@ function Register() {
   // Register.tsx
   const handleRegister = async () => {
     try {
-      const response = await fetch("/register", {
+      const response = await fetch("http://127.0.0.1:8000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }), // Include email
       });
       if (response.ok) {
-       // alert("Registration successful!");
+        // alert("Registration successful!");
         navigate("/login");
       } else {
         alert("Registration failed.");
