@@ -66,7 +66,7 @@ jobs:
           app-name: 'RoyalDeGenerator'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_fdb1a4355f7e43ffa3164e132c357ebc }}
-          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/oleksandrsokils25416/kingdom-generator_royaldegen/client:${{ github.sha }}'
+          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/kingdom-generator_royaldegen/client:${{ github.sha }}'
 
   build-and-push-image-for-server:
     env:
@@ -126,4 +126,4 @@ jobs:
           app-name: 'RoyalDeGeneratorBack'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_9922943971ad490aaafd1b5be91fa5bb }}
-          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/oleksandrsokils25416/kingdom-generator_royaldegen/server:${{ github.sha }}'
+          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/kingdom-generator_royaldegen/server:${{ github.sha }}'
