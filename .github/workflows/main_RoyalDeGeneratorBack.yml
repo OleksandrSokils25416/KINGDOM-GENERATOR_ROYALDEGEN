@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/oleksandrsokils25416/kingdom-generator_royaldegen/server:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./server/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
