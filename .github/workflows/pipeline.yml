@@ -36,12 +36,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Log in to registry
-        uses: docker/login-action@v2
-        with:
-          registry: https://ghcr.io/
-          username: ${{ secrets.AzureAppService_ContainerUsername_6c83ccd5d65d48068ea07c6576358b4a }}
-          password: ${{ secrets.AzureAppService_ContainerPassword_8324017fad234213b062f27f0e1054b5 }}
       
       - name: Build and push Docker image
         id: push
@@ -51,23 +45,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  deploy-client:
-    runs-on: ubuntu-latest
-    needs: build-and-push-image-for-client
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'RoyalDeGenerator'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_fdb1a4355f7e43ffa3164e132c357ebc }}
-          images: 'ghcr.io/${{ secrets.AzureAppService_ContainerUsername_6c83ccd5d65d48068ea07c6576358b4a }}/oleksandrsokils25416/kingdom-generator_royaldegen/client:${{ github.sha }}'
 
   build-and-push-image-for-server:
     env:
@@ -97,13 +74,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Log in to registry
-        uses: docker/login-action@v2
-        with:
-          registry: https://ghcr.io/
-          username: ${{ secrets.AzureAppService_ContainerUsername_bc1e7843dea94040a2587d3db1d04a7a }}
-          password: ${{ secrets.AzureAppService_ContainerPassword_a7d80cea0d0a455483fa5c940294e554 }}
-
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
@@ -112,22 +82,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  deploy-server:
-    runs-on: ubuntu-latest
-    needs: build-and-push-image-for-server
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'RoyalDeGeneratorBack'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_9922943971ad490aaafd1b5be91fa5bb }}
-          images: 'ghcr.io/${{ secrets.AzureAppService_ContainerUsername_bc1e7843dea94040a2587d3db1d04a7a }}/oleksandrsokils25416/kingdom-generator_royaldegen/server:${{ github.sha }}'
-
-  

@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://ghcr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_bc1e7843dea94040a2587d3db1d04a7a }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_a7d80cea0d0a455483fa5c940294e554 }}
+        username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}
+        password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_A7D80CEA0D0A455483FA5C940294E554 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ghcr.io/${{ secrets.AzureAppService_ContainerUsername_bc1e7843dea94040a2587d3db1d04a7a }}/oleksandrsokils25416/kingdom-generator_royaldegen/server:${{ github.sha }}
+        tags: ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/oleksandrsokils25416/kingdom-generator_royaldegen/server:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'RoyalDeGeneratorBack'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_9922943971ad490aaafd1b5be91fa5bb }}
-        images: 'ghcr.io/${{ secrets.AzureAppService_ContainerUsername_bc1e7843dea94040a2587d3db1d04a7a }}/oleksandrsokils25416/kingdom-generator_royaldegen/server:${{ github.sha }}'
+        images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/oleksandrsokils25416/kingdom-generator_royaldegen/server:${{ github.sha }}'
