@@ -103,6 +103,12 @@ jobs:
           username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}
           password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_A7D80CEA0D0A455483FA5C940294E554 }}
 
+      - name: Server tests
+        id: tests
+        run: |
+          docker build -t test-image -f server/Dockerfile .
+          docker run --rm test-image python server/tests.py
+
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
