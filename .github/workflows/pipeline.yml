@@ -35,14 +35,13 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - name: Log in to registry
-        uses: docker/login-action@v2
-        with:
-          registry: https://ghcr.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_A7D80CEA0D0A455483FA5C940294E554 }}
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=sha,format=long
 
-      
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
@@ -66,7 +65,7 @@ jobs:
           app-name: 'RoyalDeGenerator'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_fdb1a4355f7e43ffa3164e132c357ebc }}
-          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/kingdom-generator_royaldegen/client:${{ github.sha }}'
+          images: 'ghcr.io/oleksandrsokils25416/kingdom-generator_royaldegen/client:sha-${{ github.sha }}'
 
   build-and-push-image-for-server:
     env:
@@ -95,13 +94,12 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      - name: Log in to registry
-        uses: docker/login-action@v2
-        with:
-          registry: https://ghcr.io/
-          username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}
-          password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_A7D80CEA0D0A455483FA5C940294E554 }}
+          tags: |
+              type=schedule
+              type=ref,event=branch
+              type=ref,event=tag
+              type=ref,event=pr
+              type=sha,format=long
 
       - name: Server tests
         id: tests
@@ -132,4 +130,4 @@ jobs:
           app-name: 'RoyalDeGeneratorBack'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_9922943971ad490aaafd1b5be91fa5bb }}
-          images: 'ghcr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_BC1E7843DEA94040A2587D3DB1D04A7A }}/kingdom-generator_royaldegen/server:${{ github.sha }}'
+          images: 'ghcr.io/oleksandrsokils25416/kingdom-generator_royaldegen/server:sha-${{ github.sha }}'
