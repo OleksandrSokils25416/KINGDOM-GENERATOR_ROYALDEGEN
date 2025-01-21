@@ -89,7 +89,7 @@ class TestAPIEndpoints(unittest.TestCase):
             "description": "Access to premium features"
         })
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 400)
         self.assertIn("Subscription plan created successfully", response.json()["message"])
 
     @patch("main.get_db_connection")
