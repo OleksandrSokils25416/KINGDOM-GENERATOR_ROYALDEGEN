@@ -37,7 +37,7 @@ function App() {
     setLoading(true);
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch("/generate-text", {
+      const response = await fetch("/api/generate-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
