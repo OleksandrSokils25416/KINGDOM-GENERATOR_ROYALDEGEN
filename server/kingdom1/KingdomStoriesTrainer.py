@@ -1,6 +1,8 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from sagemaker.huggingface import HuggingFace
 import logging
+
+from sagemaker.huggingface import HuggingFace
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
 
 class KingdomStoriesTrainer:
     def __init__(self, model_name, dataset_s3_paths, role, huggingface_token):

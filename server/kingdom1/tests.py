@@ -1,9 +1,11 @@
 import unittest
 from datetime import datetime, timedelta
-from jose import jwt, JWTError
+
 from fastapi import HTTPException
-import logging
-from main import create_access_token, verify_token, SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from jose import jwt
+
+from main import create_access_token, verify_token, SECRET_KEY, ALGORITHM
+
 
 class TestJWTUtils(unittest.TestCase):
 

@@ -1,17 +1,18 @@
 import logging
-from fastapi import FastAPI, HTTPException, Depends, Header
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import OAuth2PasswordBearer
-from pydantic import BaseModel
-from passlib.hash import bcrypt
-from jose import JWTError, jwt
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import os
 from datetime import datetime, timedelta
 from typing import Optional
+
+import psycopg2
 import requests
-import os
 from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException, Header
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
+from passlib.hash import bcrypt
+from psycopg2.extras import RealDictCursor
+from pydantic import BaseModel
 
 load_dotenv()
 app = FastAPI()
