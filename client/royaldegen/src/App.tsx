@@ -37,7 +37,7 @@ function App() {
     setLoading(true);
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch("/api/generate-text", {
+      const response = await fetch("api/generate-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,10 +69,6 @@ function App() {
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);
   };
-
-  useEffect(() => {
-    alert("Welcome to the application!");
-  }, []);
 
   return (
     <Router>
