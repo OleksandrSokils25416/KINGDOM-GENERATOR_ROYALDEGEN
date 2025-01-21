@@ -67,6 +67,23 @@ jobs:
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_fdb1a4355f7e43ffa3164e132c357ebc }}
           images: 'ghcr.io/oleksandrsokils25416/kingdom-generator_royaldegen/client:sha-${{ github.sha }}'
 
+  unit-tests-for-server:
+    env:
+      IMAGE_NAME: ${{ github.repository }}/server
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Server tests
+        id: tests
+        run: |
+          docker build -t test-image -f server/Dockerfile server
+          docker run --rm test-image python -m unittest discover -s /app -p "tests.py"
+      
+
   build-and-push-image-for-server:
     env:
       IMAGE_NAME: ${{ github.repository }}/server
@@ -101,11 +118,7 @@ jobs:
               type=ref,event=pr
               type=sha,format=long
 
-      - name: Server tests
-        id: tests
-        run: |
-          docker build -t test-image -f server/Dockerfile server
-          docker run --rm test-image python -m unittest discover -s /app -p "tests.py"
+      
 
       - name: Build and push Docker image
         id: push

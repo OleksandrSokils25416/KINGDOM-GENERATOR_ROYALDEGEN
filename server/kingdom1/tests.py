@@ -1,10 +1,20 @@
 import unittest
+from unittest.mock import patch, MagicMock
 from datetime import datetime, timedelta
+from passlib.hash import bcrypt
 
 from fastapi import HTTPException
 from jose import jwt
+from main import (
+    create_access_token,
+    verify_token,
+    SECRET_KEY,
+    ALGORITHM,
+    app,
+)
+from fastapi.testclient import TestClient
 
-from main import create_access_token, verify_token, SECRET_KEY, ALGORITHM
+client = TestClient(app)
 
 
 class TestJWTUtils(unittest.TestCase):
@@ -44,6 +54,84 @@ class TestJWTUtils(unittest.TestCase):
             verify_token(token)
         self.assertEqual(cm.exception.status_code, 403)
         self.assertEqual(cm.exception.detail, "Could not validate credentials")
+
+class TestAPIEndpoints(unittest.TestCase):
+
+    def setUp(self):
+        self.client = TestClient(app)
+
+    @patch("main.get_db_connection")
+    def test_register_user(self, mock_db_conn):
+        mock_cursor = MagicMock()
+        mock_db_conn.return_value.cursor.return_value = mock_cursor
+        mock_cursor.fetchone.return_value = {"id": 1}
+
+        response = self.client.post("/register", json={
+            "username": "testuser",
+            "email": "testuser@example.com",
+            "password": "securepassword"
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("User registered successfully", response.json()["message"])
+
+
+    @patch("main.get_db_connection")
+    def test_create_subscription_plan(self, mock_db_conn):
+        mock_cursor = MagicMock()
+        mock_db_conn.return_value.cursor.return_value = mock_cursor
+        mock_cursor.fetchone.return_value = {"id": 1}
+
+        response = self.client.post("/subscriptions/plans", json={
+            "name": "Premium Plan",
+            "price": 10.99,
+            "duration_days": 30,
+            "description": "Access to premium features"
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Subscription plan created successfully", response.json()["message"])
+
+    @patch("main.get_db_connection")
+    def test_incorrect_login(self, mock_db_conn):
+        mock_cursor = MagicMock()
+        mock_db_conn.return_value.cursor.return_value = mock_cursor
+
+        mock_cursor.fetchone.return_value = {
+            "id": 1,
+            "username": "testuser",
+            "password_hash": bcrypt.hash("securepassword")
+        }
+
+        response = self.client.post("/login", json={
+            "username": "testuser",
+            "password": "wrongpassword"
+        })
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Invalid username or password", response.json()["detail"])
+
+    @patch("main.get_db_connection")
+    def test_correct_login(self, mock_db_conn):
+        mock_cursor = MagicMock()
+        mock_db_conn.return_value.cursor.return_value = mock_cursor
+
+        mock_cursor.fetchone.return_value = {
+            "id": 1,
+            "username": "testuser",
+            "password_hash": bcrypt.hash("securepassword")
+        }
+
+        response = self.client.post("/login", json={
+            "username": "testuser",
+            "password": "securepassword"
+        })
+
+        # Assertions
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("access_token", response.json())
+        self.assertEqual(response.json()["token_type"], "bearer")
+
 
 if __name__ == "__main__":
     unittest.main()
