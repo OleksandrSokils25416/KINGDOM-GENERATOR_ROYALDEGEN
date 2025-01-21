@@ -339,3 +339,35 @@ async def get_user_subscription(user_id: int):
     finally:
         cursor.close()
         conn.close()
+
+
+@app.get("/prompts/{user_id}")
+async def get_user_prompts(user_id: int):
+    """
+    Fetch all prompts created by the user with the specified user_id.
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+        # Fetch prompts for the specific user
+        cursor.execute(
+            """
+            SELECT * FROM prompts WHERE user_id = %s ORDER BY created_at DESC
+            """,
+            (user_id,)
+        )
+
+        prompts = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        if not prompts:
+            return {"message": "No prompts found for this user."}
+
+        return {"prompts": prompts}
+
+    except Exception as e:
+        logging.error(f"Unexpected error in /prompts/{user_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
