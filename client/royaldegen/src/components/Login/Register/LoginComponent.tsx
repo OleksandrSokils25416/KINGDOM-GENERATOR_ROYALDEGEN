@@ -9,7 +9,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("api/login", {
+      const response = await fetch("https://royaldegeneratorback-dnazb5haeufsevec.polandcentral-01.azurewebsites.net/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
