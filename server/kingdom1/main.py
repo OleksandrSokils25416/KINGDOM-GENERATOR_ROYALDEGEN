@@ -98,10 +98,10 @@ class UserSubscription(BaseModel):
     end_date: Optional[datetime] = None
     status: str = 'active'
 
-@app.get("/api/getter")
+@app.get("/getter")
 async def getter():
     return "Hello World!"
-@app.post("/api/register")
+@app.post("/register")
 async def register(user: User):
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -127,7 +127,7 @@ async def register(user: User):
         conn.close()
     return {"message": "User registered successfully"}
 
-@app.post("/api/login")
+@app.post("/login")
 async def login(user: UserLogin):
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -147,7 +147,7 @@ async def login(user: UserLogin):
         logging.error(f"Failed login attempt for username: {user.username}")
         raise HTTPException(status_code=400, detail="Invalid username or password")
 
-@app.post("/api/generate-text")
+@app.post("/generate-text")
 async def generate_text(request: TextRequest, authorization: Optional[str] = Header(None)):
     try:
         # Check if the authorization header is provided for JWT
@@ -252,7 +252,7 @@ def check_text_for_nsfw_words(text, nsfw_words):
             return False
     return True
 
-@app.post("/api/subscriptions/plans")
+@app.post("/subscriptions/plans")
 async def create_subscription_plan(plan: SubscriptionPlan):
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -276,7 +276,7 @@ async def create_subscription_plan(plan: SubscriptionPlan):
         cursor.close()
         conn.close()
 
-@app.post("/api/subscriptions")
+@app.post("/subscriptions")
 async def subscribe_user(user_subscription: UserSubscription):
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -314,7 +314,7 @@ async def subscribe_user(user_subscription: UserSubscription):
         cursor.close()
         conn.close()
 
-@app.get("/api/subscriptions/{user_id}")
+@app.get("/subscriptions/{user_id}")
 async def get_user_subscription(user_id: int):
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
