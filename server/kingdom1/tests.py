@@ -72,7 +72,7 @@ class TestAPIEndpoints(unittest.TestCase):
             "password": "securepassword"
         })
 
-        self.assertEqual(response.status_code, 400)#here should be 200
+        self.assertEqual(response.status_code, 200)
         self.assertIn("User registered successfully", response.json()["message"])
 
 
