@@ -110,10 +110,22 @@ async def register(user: User):
     try:
         cursor.execute(
             """
-            INSERT INTO users (username, email, password_hash) VALUES (%s, %s, %s)
+            INSERT INTO users (username, email, password_hash)
+            VALUES (%s, %s, %s)
+            RETURNING id
             """,
             (user.username, user.email, hashed_password)
         )
+        new_user_id = cursor.fetchone()["id"]
+
+        cursor.execute(
+            """
+            INSERT INTO user_subscriptions (user_id, plan_id, start_date, end_date)
+            VALUES (%s, %s, CURRENT_DATE, CURRENT_DATE + INTERVAL '30 days')
+            """,
+            (new_user_id, 1)
+        )
+
         conn.commit()
     except psycopg2.errors.UniqueViolation as e:
         conn.rollback()
@@ -126,6 +138,7 @@ async def register(user: User):
     finally:
         cursor.close()
         conn.close()
+
     return {"message": "User registered successfully"}
 
 @app.post("/login")
@@ -151,22 +164,22 @@ async def login(user: UserLogin):
 @app.post("/generate-text")
 async def generate_text(request: TextRequest, authorization: Optional[str] = Header(None)):
     try:
-        # Check if the authorization header is provided for JWT
+        # 1. Проверяем JWT
         if authorization and authorization.startswith("Bearer "):
             token = authorization.split(" ")[1]
             try:
-                username = verify_token(token)  # Verify JWT and extract username
+                username = verify_token(token)
             except HTTPException as e:
                 logging.error(f"Token verification error: {str(e)}")
                 raise HTTPException(status_code=403, detail="Invalid or expired token")
         else:
-            username = None  # No authentication provided
+            username = None
 
-        # Interpret the prompt as a list of tags
+        # 2. Разбиваем prompt на теги (не обязательно, но в вашем коде так делается)
         tags = [tag.strip() for tag in request.prompt.split(",")]
         logging.debug(f"Extracted tags: {tags}")
 
-        # Create a structured story based on the tags
+        # 3. Формируем текстовый промпт
         story_prompt = (
                 "Create a kingdom story using the following elements: " +
                 ", ".join(tags) +
@@ -175,39 +188,94 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
         )
         logging.debug(f"Generated story prompt: {story_prompt}")
 
-        # Hugging Face API call
-        headers = {"Authorization": f'Bearer {os.getenv("HF_APIKEY")}', "Content-Type": "application/json"}
+        # 4. Ищем информацию о пользователе и подписке
+        subscription_type = "basic"  # Значение по умолчанию
+        max_words = None             # Лимит символов по умолчанию
+        user_id = None
+
+        if username:
+            conn = get_db_connection()
+            cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+            # Получаем user_id
+            cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
+            user_row = cursor.fetchone()
+            if user_row:
+                user_id = user_row["id"]
+
+                # Запрос для получения имени плана + лимита символов
+                query = """
+                SELECT p.name AS plan_name, p.max_words
+                FROM user_subscriptions us
+                JOIN subscription_plans p ON p.id = us.plan_id
+                WHERE us.user_id = %s
+                  AND CURRENT_DATE BETWEEN us.start_date AND us.end_date
+                ORDER BY us.end_date DESC
+                LIMIT 1
+                """
+                cursor.execute(query, (user_id,))
+                sub_row = cursor.fetchone()
+
+                if sub_row:
+                    subscription_type = sub_row["plan_name"]  # 'basic', 'premium' и т.п.
+                    max_words = sub_row["max_words"]          # Может быть числом или None
+            else:
+                # Если пользователя не нашли в таблице users, пусть будет basic без лимита
+                subscription_type = "basic"
+                max_words = None
+
+        # 5. **Проверяем длину prompt** (количество символов)
+        prompt_length = len(request.prompt)  # Считаем символы (включая пробелы)
+
+        # Если max_words != NULL (не None), тогда есть ограничение
+        if max_words is not None:
+            if prompt_length > max_words:
+                # Пользователь превысил лимит символов
+                return {"text": "You are Typing tooo much"}
+
+        # 6. Определяем модель в зависимости от subscription_type
+        if subscription_type.lower() == "premium":
+            print("Я уже смешарик (premium)")
+            model_endpoint = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3"
+        else:
+            print("Я новенький (basic)")
+            # Пример: GPT-2
+            model_endpoint = "https://api-inference.huggingface.co/models/gpt2"
+
+        # 7. Готовим запрос к выбранной модели
+        headers = {
+            "Authorization": f'Bearer {os.getenv("HF_APIKEY")}',
+            "Content-Type": "application/json"
+        }
         payload = {
             "inputs": story_prompt,
-            "parameters": {"temperature": request.temperature, "max_new_tokens": request.max_tokens},
+            "parameters": {
+                "temperature": request.temperature,
+                "max_new_tokens": request.max_tokens
+            },
         }
 
         response = requests.post(
-            "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3",
+            model_endpoint,
             headers=headers,
             json=payload,
             timeout=10
         )
 
-        # Handle errors from Hugging Face API
+        # 8. Проверка статуса ответа
         if response.status_code != 200:
             logging.error(f"Hugging Face API returned {response.status_code}: {response.text}")
             raise HTTPException(status_code=500, detail="API call failed")
 
-        # Process the generated text
+        # 9. Обработка полученного текста
         full_text = response.json()[0]["generated_text"]
         logging.debug(f"Full text received: {full_text}")
 
-        # Remove the root prompt text from the response
         cleaned_text = full_text.replace(story_prompt, "").strip()
         logging.info(f"Cleaned generated text: {cleaned_text}")
 
-        # Save generated story if user is logged in
-        if username:
-            conn = get_db_connection()
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
-            user_id = cursor.fetchone()["id"]
+        # 10. Если пользователь авторизован, сохраняем результат в БД
+        if user_id:
             cursor.execute(
                 """
                 INSERT INTO prompts (user_id, prompt, temperature, max_tokens, generated_text)
@@ -219,12 +287,12 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
             cursor.close()
             conn.close()
 
-        # Check for NSFW content
+        # 11. Проверка на NSFW
         nsfw_directory = os.path.join(os.path.dirname(__file__), 'NSFW')
         nsfw_words_set = load_nsfw_words(nsfw_directory)
-        isclear = check_text_for_nsfw_words(cleaned_text, nsfw_words_set)
+        is_clear = check_text_for_nsfw_words(cleaned_text, nsfw_words_set)
 
-        if not isclear:
+        if not is_clear:
             cleaned_text = "NSFW detected. Please try another prompt."
 
         return {"text": cleaned_text}
@@ -326,7 +394,10 @@ async def get_user_subscription(user_id: int):
             SELECT us.*, sp.name AS plan_name, sp.price, sp.duration_days
             FROM user_subscriptions us
             JOIN subscription_plans sp ON us.plan_id = sp.id
-            WHERE us.user_id = %s AND us.status = 'active'
+            WHERE us.user_id = %s
+              AND CURRENT_DATE BETWEEN us.start_date AND us.end_date
+            ORDER BY us.end_date DESC
+            LIMIT 1
             """,
             (user_id,)
         )
