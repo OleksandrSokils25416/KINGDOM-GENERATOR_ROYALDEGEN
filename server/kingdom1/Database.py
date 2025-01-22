@@ -203,11 +203,32 @@ def get_current_subscription(user_id):
         }
     else:
         return None
+def drop_all_tables():
+    conn = psycopg2.connect(**DATABASE_CONFIG)
+    cursor = conn.cursor()
+
+    drop_tables_query = """
+    DO $$ 
+    BEGIN
+        EXECUTE (
+            SELECT string_agg(format('DROP TABLE IF EXISTS %I CASCADE;', tablename), ' ')
+            FROM pg_tables
+            WHERE schemaname = 'public'
+        );
+    END $$;
+    """
+    cursor.execute(drop_tables_query)
+    conn.commit()
+    cursor.close()
+    conn.close()
+    print("All tables dropped successfully.")
 
 # Run the functions
 if __name__ == "__main__":
-    create_tables()
     drop_all_data()
+    drop_all_tables()
+    create_tables()
+
     create_default_subscription_plans()
     # create_test_data()
     remove_expired_subscriptions()

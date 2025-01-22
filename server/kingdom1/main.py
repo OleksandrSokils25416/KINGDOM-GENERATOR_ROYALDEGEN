@@ -164,7 +164,6 @@ async def login(user: UserLogin):
 @app.post("/generate-text")
 async def generate_text(request: TextRequest, authorization: Optional[str] = Header(None)):
     try:
-        # 1. Проверяем JWT
         if authorization and authorization.startswith("Bearer "):
             token = authorization.split(" ")[1]
             try:
@@ -175,11 +174,9 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
         else:
             username = None
 
-        # 2. Разбиваем prompt на теги (не обязательно, но в вашем коде так делается)
         tags = [tag.strip() for tag in request.prompt.split(",")]
         logging.debug(f"Extracted tags: {tags}")
 
-        # 3. Формируем текстовый промпт
         story_prompt = (
                 "Create a kingdom story using the following elements: " +
                 ", ".join(tags) +
@@ -188,22 +185,21 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
         )
         logging.debug(f"Generated story prompt: {story_prompt}")
 
-        # 4. Ищем информацию о пользователе и подписке
-        subscription_type = "basic"  # Значение по умолчанию
-        max_words = None             # Лимит символов по умолчанию
+        subscription_type = "basic"
+        max_words = None
         user_id = None
 
         if username:
             conn = get_db_connection()
             cursor = conn.cursor(cursor_factory=RealDictCursor)
 
-            # Получаем user_id
+
             cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
             user_row = cursor.fetchone()
             if user_row:
                 user_id = user_row["id"]
 
-                # Запрос для получения имени плана + лимита символов
+
                 query = """
                 SELECT p.name AS plan_name, p.max_words
                 FROM user_subscriptions us
@@ -217,32 +213,27 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
                 sub_row = cursor.fetchone()
 
                 if sub_row:
-                    subscription_type = sub_row["plan_name"]  # 'basic', 'premium' и т.п.
-                    max_words = sub_row["max_words"]          # Может быть числом или None
+                    subscription_type = sub_row["plan_name"]
+                    max_words = sub_row["max_words"]
             else:
-                # Если пользователя не нашли в таблице users, пусть будет basic без лимита
+
                 subscription_type = "basic"
                 max_words = None
 
-        # 5. **Проверяем длину prompt** (количество символов)
-        prompt_length = len(request.prompt)  # Считаем символы (включая пробелы)
 
-        # Если max_words != NULL (не None), тогда есть ограничение
+        prompt_length = len(request.prompt)
+
         if max_words is not None:
             if prompt_length > max_words:
-                # Пользователь превысил лимит символов
                 return {"text": "You are Typing tooo much"}
 
-        # 6. Определяем модель в зависимости от subscription_type
         if subscription_type.lower() == "premium":
-            print("Я уже смешарик (premium)")
+            print("Premium user")
             model_endpoint = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3"
         else:
-            print("Я новенький (basic)")
-            # Пример: GPT-2
-            model_endpoint = "https://api-inference.huggingface.co/models/gpt2"
+            print("Basic user")
+            model_endpoint = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
 
-        # 7. Готовим запрос к выбранной модели
         headers = {
             "Authorization": f'Bearer {os.getenv("HF_APIKEY")}',
             "Content-Type": "application/json"
@@ -262,19 +253,16 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
             timeout=10
         )
 
-        # 8. Проверка статуса ответа
         if response.status_code != 200:
             logging.error(f"Hugging Face API returned {response.status_code}: {response.text}")
             raise HTTPException(status_code=500, detail="API call failed")
 
-        # 9. Обработка полученного текста
         full_text = response.json()[0]["generated_text"]
         logging.debug(f"Full text received: {full_text}")
 
         cleaned_text = full_text.replace(story_prompt, "").strip()
         logging.info(f"Cleaned generated text: {cleaned_text}")
 
-        # 10. Если пользователь авторизован, сохраняем результат в БД
         if user_id:
             cursor.execute(
                 """
