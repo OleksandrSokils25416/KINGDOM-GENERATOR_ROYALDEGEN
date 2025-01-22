@@ -1,21 +1,45 @@
 .output-text-container {
-    margin-top: 20px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 600px;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
-    max-height: 60vh;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.skeleton-loader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.skeleton-line {
+  height: 1rem;
+  width: 80%;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-line.short {
+  width: 50%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
   }
-  
-  .output-text-container p {
-    color: rgba(94, 94, 94, 1);
-    text-align: left;
-    font-size: 1.2em;
+  100% {
+    background-position: 200px 0;
   }
-  
+}
+
+.skeleton-loader .skeleton-line {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+}

@@ -1,0 +1,19 @@
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+
+.contact-text {
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+.contacts-container {
+    font-size: 1.2rem;
+}
+
+.contacts-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}

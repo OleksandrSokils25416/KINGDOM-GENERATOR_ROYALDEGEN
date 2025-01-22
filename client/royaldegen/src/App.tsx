@@ -8,10 +8,12 @@ import SidebarComponent from "./components/Sidebar/SidebarComponent";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ParticlesBG from "./components/Particles/ParticlesBG";
 import HeaderComponent from "./components/Header/HeaderComponent";
+import ContactsComponent from "./components/Contacts/ContactsComponent.tsx";
+import PromptsComponent from "./components/Prompts/PromptsComponent.tsx";
+import { UserProvider } from "./context/UserProvider.tsx";
 
 function App() {
   const [generatedText, setGeneratedText] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
   useEffect(() => {
@@ -34,7 +36,6 @@ function App() {
     prompt: string,
     settings: { temperature: number; maxTokens: number }
   ) => {
-    setLoading(true);
     try {
       const token = localStorage.getItem("accessToken");
       const response = await fetch("https://royaldegeneratorback-dnazb5haeufsevec.polandcentral-01.azurewebsites.net/generate-text", {
@@ -61,8 +62,6 @@ function App() {
     } catch (error) {
       console.error("Error generating text:", error);
       setGeneratedText("Error generating text.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -71,7 +70,8 @@ function App() {
   };
 
   return (
-    <Router>
+    <UserProvider>
+      <Router>
       <div className="main-container">
         <HeaderComponent toggleSidebar={toggleSidebar} />
         <SidebarComponent isExpanded={isSidebarExpanded} />
@@ -82,21 +82,20 @@ function App() {
               element={
                 <>
                   <GenerateButtonComponent onGenerateText={generateText} />
-                  {loading ? (
-                    <div className="loading-spinner"></div>
-                  ) : (
-                    <OutputTextComponent text={generatedText} />
-                  )}
+                  <OutputTextComponent text={generatedText} />
                 </>
               }
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/contact" element={<ContactsComponent />} />
+            <Route path="/prompts" element={<PromptsComponent />} />
           </Routes>
         </main>
         <ParticlesBG />
       </div>
     </Router>
+    </UserProvider>
   );
 }
 

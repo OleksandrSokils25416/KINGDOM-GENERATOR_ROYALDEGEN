@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import "./OutputTextComponent.css";
 
 interface Props {
@@ -6,28 +6,32 @@ interface Props {
 }
 
 const OutputTextComponent = ({ text }: Props) => {
-  const [displayedText, setDisplayedText] = useState<string>("");
-  const indexRef = useRef(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    indexRef.current = 0;
-    setDisplayedText("");
+    if (text) {
 
-    const interval = setInterval(() => {
-      if (indexRef.current < text.length) {
-        setDisplayedText((prev) => prev + text.charAt(indexRef.current));
-        indexRef.current += 1;
-      } else {
-        clearInterval(interval);
-      }
-    }, 120);
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 3000);
 
-    return () => clearInterval(interval);
+      return () => clearTimeout(timer);
+    } else {
+      setLoading(true);
+    }
   }, [text]);
 
   return (
     <div className="output-text-container">
-      <p>{displayedText || "Your generated text will appear here."}</p>
+      {loading ? (
+        <div className="skeleton-loader">
+          <div className="skeleton-line"></div>
+          <div className="skeleton-line"></div>
+          <div className="skeleton-line short"></div>
+        </div>
+      ) : (
+        <p>{text || "Your generated text will appear here."}</p>
+      )}
     </div>
   );
 };

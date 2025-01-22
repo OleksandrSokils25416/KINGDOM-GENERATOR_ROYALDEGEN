@@ -168,9 +168,10 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
 
         # Create a structured story based on the tags
         story_prompt = (
-            "Create a kingdom story using the following elements: "
-            + ", ".join(tags) +
-            ". Include characters, events, and descriptions to bring the tags to life."
+                "Create a kingdom story using the following elements: " +
+                ", ".join(tags) +
+                ". Include characters, events, and descriptions to bring the tags to life." +
+                "Write the story in the language the elements are written in."
         )
         logging.debug(f"Generated story prompt: {story_prompt}")
 
@@ -341,21 +342,25 @@ async def get_user_subscription(user_id: int):
         conn.close()
 
 
-@app.get("/prompts/{user_id}")
-async def get_user_prompts(user_id: int):
+@app.get("/prompts/{username}")
+async def get_user_prompts(username: str):
     """
-    Fetch all prompts created by the user with the specified user_id.
+    Fetch all prompts created by the user with the specified username.
     """
     try:
         conn = get_db_connection()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
 
-        # Fetch prompts for the specific user
+        # Fetch prompts for the specific username
         cursor.execute(
             """
-            SELECT * FROM prompts WHERE user_id = %s ORDER BY created_at DESC
+            SELECT p.* 
+            FROM prompts p
+            JOIN users u ON p.user_id = u.id
+            WHERE u.username = %s
+            ORDER BY p.created_at DESC
             """,
-            (user_id,)
+            (username,)
         )
 
         prompts = cursor.fetchall()
@@ -364,10 +369,10 @@ async def get_user_prompts(user_id: int):
         conn.close()
 
         if not prompts:
-            return {"message": "No prompts found for this user."}
+            return {"message": f"No prompts found for user '{username}'."}
 
         return {"prompts": prompts}
 
     except Exception as e:
-        logging.error(f"Unexpected error in /prompts/{user_id}: {str(e)}")
+        logging.error(f"Unexpected error in /prompts/{username}: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")

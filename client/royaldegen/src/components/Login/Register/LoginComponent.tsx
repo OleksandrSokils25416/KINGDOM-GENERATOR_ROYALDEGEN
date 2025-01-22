@@ -1,54 +1,65 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import Link and useNavigate
-import "./AuthComponent.css";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../../context/UserProvider.tsx";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [usernameInput, setUsernameInput] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Use navigate for redirection after login
+  const { username, setUsername } = useUserContext();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("https://royaldegeneratorback-dnazb5haeufsevec.polandcentral-01.azurewebsites.net/login", {
+      const response = await fetch("https://royaldegeneratorback-dnazb5haeufsevec.polandcentral-01.azurewebsites.net//login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username: usernameInput, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem("accessToken", data.access_token); // Save token in localStorage
-        //alert("Login successful!");
-        navigate("/"); // Redirect to home page after login
+        localStorage.setItem("accessToken", data.access_token);
+        setUsername(usernameInput);
+        navigate("/");
       } else {
-        const errorText = await response.text();
-        alert(`Login failed: ${errorText}`);
+        alert("Login failed");
       }
     } catch (error) {
-      console.error("Error logging in:", error);
-      alert("Error logging in.");
+      console.error("Login error:", error);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setUsername(null);
+    navigate("/login");
   };
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button onClick={handleLogin}>Login</button>
-      <p>
-        Don't have an account yet? <Link to="/register">Register</Link>
-      </p>
+      {username ? (
+        <>
+          <h2 id="welc-user">Welcome, {username}!</h2>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <h2>Login</h2>
+          <input
+            type="text"
+            value={usernameInput}
+            onChange={(e) => setUsernameInput(e.target.value)}
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+          <button onClick={handleLogin}>Login</button>
+        </>
+      )}
     </div>
   );
 }
