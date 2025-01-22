@@ -18,7 +18,7 @@ const SubsComponent: React.FC = () => {
   useEffect(() => {
     const fetchSubscriptions = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/subscriptions");
+        const response = await fetch("https://royaldegeneratorback-dnazb5haeufsevec.polandcentral-01.azurewebsites.net/subscriptions");
 
         if (!response.ok) {
           const errorData = await response.json();
