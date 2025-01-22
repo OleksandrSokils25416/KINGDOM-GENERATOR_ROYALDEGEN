@@ -413,6 +413,32 @@ async def get_user_subscription(user_id: int):
         conn.close()
 
 
+@app.get("/subscriptions")
+async def get_user_subscriptions():
+    """
+    Fetches all rows from the 'subscription_plans' table.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        # Fetch all rows
+        cursor.execute("SELECT * FROM subscription_plans")
+        subscriptions = cursor.fetchall()
+
+        # Check if rows exist
+        if not subscriptions:
+            return {"message": "No subscriptions found"}
+
+        return subscriptions
+    except Exception as e:
+        logging.error(f"Error fetching subscriptions: {str(e)}")
+        raise HTTPException(status_code=500, detail="Could not fetch subscriptions")
+    finally:
+        # Always close resources
+        cursor.close()
+        conn.close()
+
+
 @app.get("/prompts/{username}")
 async def get_user_prompts(username: str):
     """

@@ -44,7 +44,7 @@ const PromptsComponent: React.FC = () => {
       }
 
       try {
-        const response = await fetch(`https://royaldegeneratorback-dnazb5haeufsevec.polandcentral-01.azurewebsites.net/prompts/${username}`, {
+        const response = await fetch(`http://127.0.0.1:8000/prompts/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

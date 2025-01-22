@@ -11,6 +11,7 @@ import HeaderComponent from "./components/Header/HeaderComponent";
 import ContactsComponent from "./components/Contacts/ContactsComponent.tsx";
 import PromptsComponent from "./components/Prompts/PromptsComponent.tsx";
 import { UserProvider } from "./context/UserProvider.tsx";
+import SubsComponent from "./components/Subs/SubsComponent.tsx";
 
 function App() {
   const [generatedText, setGeneratedText] = useState<string>("");
@@ -38,7 +39,7 @@ function App() {
   ) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch("https://royaldegeneratorback-dnazb5haeufsevec.polandcentral-01.azurewebsites.net/generate-text", {
+      const response = await fetch("http://127.0.0.1:8000/generate-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,6 +91,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<ContactsComponent />} />
             <Route path="/prompts" element={<PromptsComponent />} />
+            <Route path="/subscriptions" element={<SubsComponent />} />
           </Routes>
         </main>
         <ParticlesBG />
