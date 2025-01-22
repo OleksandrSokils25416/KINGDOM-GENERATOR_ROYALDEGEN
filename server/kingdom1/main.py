@@ -232,7 +232,7 @@ async def generate_text(request: TextRequest, authorization: Optional[str] = Hea
             model_endpoint = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3"
         else:
             print("Basic user")
-            model_endpoint = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
+            model_endpoint = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3"
 
         headers = {
             "Authorization": f'Bearer {os.getenv("HF_APIKEY")}',
